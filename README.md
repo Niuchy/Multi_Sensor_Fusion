@@ -66,7 +66,6 @@ python -m pip install -r dds_swarm_fusion/requirements-dds.txt
 bash build_native.sh --equipment-only
 ```
 
-Mac 可用于源码维护、离线数据分析和测试，不支持通过仓库附带的 Linux DDS 动态库运行原生收发链路。
 
 ### 2. 核对现场配置
 
