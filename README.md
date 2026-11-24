@@ -230,4 +230,3 @@ node tests/test_track_output_status.cjs
 - [DDS 录制回放](DDS_DATA_TOOL.md) · [雷达日志回放检查](RADAR_DDS_REPLAY_TEST.md)
 - [实装仿真控制与评价](FIELD_SIM_WEB_GUIDE.md) · [DDS 输出过滤](docs/DDS_OUTPUT_FILTER.md)
 
-专题文档可能包含特定批次的现场示例和历史说明；部署时以当前代码、所选配置及启动日志为准。第三方组件和设备协议资料的使用、再分发须遵循各自授权要求，不能因仓库可访问而推定允许任意使用。
