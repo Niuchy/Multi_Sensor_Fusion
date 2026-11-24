@@ -1,0 +1,14 @@
+# 正式 FusionMultiTarget 发布过滤；不删内部航迹，不改变外部 WebSocket。
+# 四项阈值均仅在融合航迹建立后的 [0,9) 秒内生效，满9秒不再因这四项拦截。
+# true=开启，false=关闭；各项独立，总开关关闭后全部跳过（原有融合输出条件保留）。
+# 网页“应用到当前运行”不写盘；“保存配置并应用”同时更新开关和阈值，保存前自动备份。
+enabled: true
+points_enabled: true
+min_points: 2  # 新定位更新次数；预测、重复报文、单站纯测向不计数。
+min_speed_enabled: true
+min_speed_mps: 1.0  # 水平速度 m/s，等于边界可通过。
+max_speed_enabled: true
+max_speed_mps: 15.0
+height_enabled: true
+min_height_m: 30.0  # 目标 ENU 高度减雷达站址 ENU 高度，并非绝对海拔。
+reference_radar_id: radar_3152  # 雷达当前生效站址；筛选期内高度过滤开启时，未知站址不放行。

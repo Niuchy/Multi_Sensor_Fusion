@@ -1,0 +1,10 @@
+prefix="/mnt/d/code/pxsb_backend/source/build/linux-x86/third_party/install"
+includedir="${prefix}/include"
+libdir="${prefix}/lib"
+
+Name: rocksdb
+Description: An embeddable persistent key-value store for fast storage
+URL: https://rocksdb.org/
+Version: 9.7.0
+Cflags: -I"${includedir}"
+Libs: -L"${libdir}" -lrocksdb

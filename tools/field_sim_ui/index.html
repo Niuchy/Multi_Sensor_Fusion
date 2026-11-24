@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>实装仿真控制台 · SB Fusion</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<header><div><div class="eyebrow">SB FUSION / FIELD SIMULATION</div><h1>实装仿真控制台 <span>独立测试模式</span></h1></div><nav><span id="connection" class="badge">正在连接</span><a id="diagnostics" target="_blank" rel="noreferrer">接入诊断 ↗</a><a id="console" target="_blank" rel="noreferrer">融合态势 ↗</a><button id="logout" class="quiet">退出登录</button></nav></header>
+<main>
+<div class="intro"><div><h2>把真实设备的“不完美”，放进测试里。</h2><p>独立配置雷达与一台 / 两台光电。原演示模式不变，生成和评估不会发送 DDS。</p></div><span class="badge safe">默认不发包 · 不启停融合</span></div>
+<div id="notice" role="status" aria-live="polite">请使用启动终端的访问口令登录。</div>
+<div class="workspace">
+<section class="panel configuration"><div class="section-title"><h2><em>01</em> 配置模拟设备</h2><span id="deviceCount">1 台光电</span></div>
+<form id="configForm"><fieldset id="configFields">
+<label>快速组合<select id="recipe"><option value="radar-single">雷达 + 单光电间歇失距</option><option value="radar-dual">雷达 + 双光电</option><option value="dual-bearing">双光电纯测向（无雷达）</option><option value="single-bearing">单光电纯测向（无雷达）</option><option value="custom">自定义组合</option></select></label>
+<div class="pair"><label>测试时长 / s<input id="duration" type="number" min="15" max="600" step="1" required value="72"></label><label>随机种子<input id="seed" type="number" step="1" required value="20261021"></label></div>
+<div class="pair"><label>无人机数量<select id="targetCount"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></label><label>评价匹配门限 / m<input id="evalGate" type="number" min="1" max="1000" step="1" value="50" required></label></div>
+<p id="targetHint" class="hint">每架有独立轨迹。每台光电只跟踪下方选定的一架；评价门限不改变融合算法。</p>
+<article class="device radar"><div class="device-title"><h3><i></i> 雷达</h3><label class="switch"><input id="radarEnabled" type="checkbox" checked>启用</label></div>
+<div class="pair"><label>设备号<input id="radarId" type="number" min="1" max="4294967295" step="1" required value="73152"></label><label>报告周期 / s<input id="radarPeriod" type="number" min="0.5" max="30" step="0.1" required value="3"></label></div>
+<div class="triple"><label>站址东 / m<input id="radarX" type="number" step="0.1" required value="0"></label><label>站址北 / m<input id="radarY" type="number" step="0.1" required value="0"></label><label>站址高 / m<input id="radarZ" type="number" step="0.1" required value="3"></label></div>
+<div class="pair"><label>正常探测概率<input id="radarPd" type="number" min="0" max="1" step="0.01" required value="0.97"></label><label>最长外推 / s<input id="radarCoast" type="number" min="0" max="30" step="0.1" required value="6"></label></div>
+<label class="check"><input id="lowSpeed" type="checkbox" checked>低速 / 悬停时降低雷达探测率</label>
+<div class="pair"><label>低速阈值 / m·s⁻¹<input id="lowThreshold" type="number" min="0" max="30" step="0.1" required value="0.8"></label><label>低速探测概率<input id="lowPd" type="number" min="0" max="1" step="0.01" required value="0.05"></label></div></article>
+<div id="eoCards"></div><button type="button" id="addEO" class="add">＋ 添加第二台光电</button>
+<details class="advanced"><summary>参考原点与噪声参数</summary><p class="hint">站址均相对此 ENU 原点。测试标定只作用于本次数据，不修改实装配置。</p>
+<div class="triple"><label>原点经度 / °<input id="originLon" type="number" step="0.000001" required value="120"></label><label>原点纬度 / °<input id="originLat" type="number" step="0.000001" required value="30"></label><label>原点高度 / m<input id="originAlt" type="number" min="0" step="0.1" required value="0"></label></div>
+<div class="pair"><label>雷达距离噪声 σ / m<input id="radarNoise" type="number" min="0.01" max="100" step="0.01" required value="10"></label><label>雷达角度噪声 σ / °<input id="radarAngle" type="number" min="0.01" max="100" step="0.01" required value="0.3"></label><label>光电距离噪声 σ / m<input id="eoNoise" type="number" min="0.01" max="100" step="0.01" required value="5"></label><label>光电角度噪声 σ / °<input id="eoAngle" type="number" min="0.01" max="100" step="0.01" required value="0.3"></label></div></details>
+</fieldset><div class="generate-bar"><span id="dirty" class="hint">参数尚未生成数据</span><button type="submit" id="generate" class="primary">生成测试数据 →</button></div></form></section>
+<div class="right-column">
+<section class="panel"><div class="section-title"><h2>布站预览</h2><span>配置示意 · 非实时融合航迹</span></div><canvas id="layout" width="960" height="300" aria-label="雷达与光电布站 ENU 示意图"></canvas><div class="legend"><span class="radar-color">● 雷达</span><span class="eo-color">● 光电一</span><span class="eo2-color">● 光电二</span><span id="baseline">只有单站测向时，不能独立确定目标距离。</span></div></section>
+<section class="panel"><div class="section-title"><h2><em>02</em> 数据与离线验证</h2><span>只生成与计算，不发 DDS</span></div><label>已生成的测试<select id="runs"><option value="">尚未生成测试数据</option></select></label>
+<div class="stats"><div><span>计划报文</span><strong id="planned">—</strong></div><div><span>本次发送调用</span><strong id="sent">0</strong></div><div><span>当前任务</span><strong id="phase">空闲</strong></div></div>
+<div id="devicePackets" class="packet-list">生成后显示各设备的计划报文数。</div>
+<div class="actions"><button id="evaluate">运行离线评估</button><button id="preflight">DDS 预检查（不发包）</button><a id="downloadCapture" class="button" hidden>下载录制文件</a><a id="downloadEvaluation" class="button" hidden>下载评估结果</a></div>
+<div id="evaluation" class="result" hidden></div></section>
+<section class="panel publish"><div class="section-title"><h2><em>03</em> 接入融合 · 发送 DDS</h2><span class="warning-label">需人工确认隔离</span></div>
+<p class="hint">先停止原演示、真实设备及其他回放发送者，隔离现场业务。用下面的命令手动启动测试融合实例；本页面不会替你重启融合。</p>
+<label>本次测试的融合启动命令<textarea id="launch" readonly rows="3" placeholder="先生成或选择测试数据"></textarea></label><button id="copy" class="quiet">复制启动命令</button>
+<p class="hint">必须加载这份光电配置，才会按不同设备号接入两台光电。换一个测试目录，需要重新加载对应配置。仅换网页端口不等于隔离 DDS。</p>
+<div class="confirmations"><label class="check"><input type="checkbox" id="isolated">已隔离现场业务，并停止其他设备 / 演示 / 回放输入</label><label class="check"><input type="checkbox" id="fusionReady">已使用上面的配置手动启动测试融合实例</label><label class="check"><input type="checkbox" id="confirmSend">确认将选中测试通过 DDS 以 1 倍速发送</label></div>
+<div class="actions"><button id="publish" class="primary">开始 DDS 发送</button><button id="stop" class="danger">停止本工具任务</button><span id="ticket" class="hint">尚未预检查</span></div><p class="hint">发送次数不等于融合已接收，请同时查看“接入诊断”。关闭网页不停止发送；请点击停止按钮。</p></section>
+<section class="panel"><div class="section-title"><h2>任务日志</h2><span>只控制本工具创建的任务</span></div><pre id="logs" aria-live="polite">等待操作…</pre></section>
+</div></div>
+<footer>设备行为模型，非实装精度保证。测距失败保留角度；单站纯测向不能凭空定位；双站交汇仍受基线与几何条件限制。</footer>
+</main>
+<dialog id="loginDialog"><form id="loginForm"><div class="eyebrow">LOCAL TEST WORKBENCH</div><h2>登录实装仿真控制台</h2><p>输入运行 <code>field_sim_web.sh</code> 的终端中显示的访问口令。</p><label>访问口令<input id="accessKey" type="password" autocomplete="current-password" required autofocus></label><p id="loginError" role="alert"></p><button class="primary" type="submit">进入控制台</button><p class="hint">独立服务 · 默认端口 8011 · 不自动发送 DDS</p></form></dialog>
+</body></html>

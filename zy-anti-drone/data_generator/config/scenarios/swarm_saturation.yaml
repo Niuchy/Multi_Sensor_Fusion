@@ -1,0 +1,377 @@
+scenario:
+  name: 饱和式突击
+  description: 15架固定翼无人机，5方向×3高度层同时突入，无领机，牺牲数量保证突防
+simulation:
+  duration: 120
+  dt: 0.05
+  seed: 88219
+targets:
+- id: 1
+  label: 突击-1
+  type: fixed_wing
+  rcs: 0.212979928653049
+  emitter:
+    active: true
+    freq: 2400000000.0
+    pri: 0.0002
+    pw: 1.0e-05
+    modulation: QPSK
+    power: 1.997449549353788
+  waypoints:
+  - - 694.6
+    - -3939.2
+    - 50
+    - 9.2
+  - - 367.5
+    - -2118.3
+    - 50
+    - 54.5
+  - - 40.4
+    - -297.3
+    - 25.0
+    - 99.8
+- id: 2
+  label: 突击-2
+  type: fixed_wing
+  rcs: 0.11238650949706132
+  emitter:
+    active: false
+    freq: 6000000000.0
+    pri: 0.0002
+    pw: 2.0e-06
+    modulation: QPSK
+    power: 1.5187235147207812
+  waypoints:
+  - - 694.6
+    - -3939.2
+    - 150
+    - 27.5
+  - - 369.6
+    - -2118.0
+    - 150
+    - 60.3
+  - - 44.5
+    - -296.7
+    - 75.0
+    - 93.1
+- id: 3
+  label: 突击-3
+  type: fixed_wing
+  rcs: 0.17726518353509918
+  emitter:
+    active: true
+    freq: 5800000000.0
+    pri: 0.001
+    pw: 2.0e-05
+    modulation: QPSK
+    power: 1.1101171646160808
+  waypoints:
+  - - 694.6
+    - -3939.2
+    - 300
+    - 18.0
+  - - 361.8
+    - -2118.9
+    - 300
+    - 60.4
+  - - 28.9
+    - -298.6
+    - 150.0
+    - 102.7
+- id: 4
+  label: 突击-4
+  type: fixed_wing
+  rcs: 0.0694435162203464
+  emitter:
+    active: true
+    freq: 6000000000.0
+    pri: 0.001
+    pw: 2.0e-05
+    modulation: BPSK
+    power: 1.9504428330591406
+  waypoints:
+  - - 3064.2
+    - -2571.2
+    - 50
+    - 41.0
+  - - 1648.9
+    - -1379.7
+    - 50
+    - 75.1
+  - - 233.6
+    - -188.2
+    - 25.0
+    - 109.1
+- id: 5
+  label: 突击-5
+  type: fixed_wing
+  rcs: 0.07037087824118414
+  emitter:
+    active: false
+    freq: 2400000000.0
+    pri: 0.0008
+    pw: 2.0e-05
+    modulation: OFDM
+    power: 1.300820202705256
+  waypoints:
+  - - 3064.2
+    - -2571.2
+    - 150
+    - 42.4
+  - - 1638.4
+    - -1391.4
+    - 150
+    - 74.9
+  - - 212.5
+    - -211.7
+    - 75.0
+    - 107.4
+- id: 6
+  label: 突击-6
+  type: fixed_wing
+  rcs: 0.2778693942435641
+  emitter:
+    active: true
+    freq: 6000000000.0
+    pri: 0.0008
+    pw: 2.0e-05
+    modulation: QPSK
+    power: 1.1625810349869425
+  waypoints:
+  - - 3064.2
+    - -2571.2
+    - 300
+    - 10.8
+  - - 1648.5
+    - -1380.2
+    - 300
+    - 52.4
+  - - 232.8
+    - -189.2
+    - 150.0
+    - 94.1
+- id: 7
+  label: 突击-7
+  type: fixed_wing
+  rcs: 0.1063349071152626
+  emitter:
+    active: true
+    freq: 6000000000.0
+    pri: 0.001
+    pw: 1.0e-05
+    modulation: QPSK
+    power: 0.8587766082513217
+  waypoints:
+  - - 4000.0
+    - 0.0
+    - 50
+    - 16.4
+  - - 2149.9
+    - -6.6
+    - 50
+    - 52.3
+  - - 299.7
+    - -13.2
+    - 25.0
+    - 88.2
+- id: 8
+  label: 突击-8
+  type: fixed_wing
+  rcs: 0.1668946445181742
+  emitter:
+    active: true
+    freq: 2400000000.0
+    pri: 0.0002
+    pw: 5.0e-06
+    modulation: OFDM
+    power: 1.5424668248083049
+  waypoints:
+  - - 4000.0
+    - 0.0
+    - 150
+    - 39.8
+  - - 2149.9
+    - -6.4
+    - 150
+    - 71.2
+  - - 299.7
+    - -12.8
+    - 75.0
+    - 102.5
+- id: 9
+  label: 突击-9
+  type: fixed_wing
+  rcs: 0.2709363619082198
+  emitter:
+    active: false
+    freq: 2400000000.0
+    pri: 0.001
+    pw: 2.0e-05
+    modulation: BPSK
+    power: 0.6286924618214949
+  waypoints:
+  - - 4000.0
+    - 0.0
+    - 300
+    - 24.1
+  - - 2150.0
+    - 1.6
+    - 300
+    - 61.5
+  - - 300.0
+    - 3.3
+    - 150.0
+    - 98.9
+- id: 10
+  label: 突击-10
+  type: fixed_wing
+  rcs: 0.2597823700028151
+  emitter:
+    active: false
+    freq: 5800000000.0
+    pri: 0.001
+    pw: 5.0e-06
+    modulation: OFDM
+    power: 1.4438091638485138
+  waypoints:
+  - - 3064.2
+    - 2571.2
+    - 50
+    - 32.4
+  - - 1646.3
+    - 1382.9
+    - 50
+    - 64.4
+  - - 228.4
+    - 194.6
+    - 25.0
+    - 96.4
+- id: 11
+  label: 突击-11
+  type: fixed_wing
+  rcs: 0.1183163010507901
+  emitter:
+    active: true
+    freq: 5800000000.0
+    pri: 0.0002
+    pw: 2.0e-05
+    modulation: QPSK
+    power: 1.8017978375924373
+  waypoints:
+  - - 3064.2
+    - 2571.2
+    - 150
+    - 5.2
+  - - 1638.8
+    - 1391.0
+    - 150
+    - 42.9
+  - - 213.5
+    - 210.8
+    - 75.0
+    - 80.5
+- id: 12
+  label: 突击-12
+  type: fixed_wing
+  rcs: 0.22734791359026735
+  emitter:
+    active: true
+    freq: 6000000000.0
+    pri: 0.0008
+    pw: 1.0e-05
+    modulation: OFDM
+    power: 1.150339723057958
+  waypoints:
+  - - 3064.2
+    - 2571.2
+    - 300
+    - 25.7
+  - - 1647.0
+    - 1382.0
+    - 300
+    - 65.7
+  - - 229.7
+    - 192.9
+    - 150.0
+    - 105.7
+- id: 13
+  label: 突击-13
+  type: fixed_wing
+  rcs: 0.06262280310822145
+  emitter:
+    active: true
+    freq: 2400000000.0
+    pri: 0.0008
+    pw: 1.0e-05
+    modulation: OFDM
+    power: 1.742348151841549
+  waypoints:
+  - - 694.6
+    - 3939.2
+    - 50
+    - 10.2
+  - - 383.8
+    - 2115.1
+    - 50
+    - 54.4
+  - - 73.0
+    - 291.0
+    - 25.0
+    - 98.6
+- id: 14
+  label: 突击-14
+  type: fixed_wing
+  rcs: 0.2060537925941342
+  emitter:
+    active: true
+    freq: 2400000000.0
+    pri: 0.0005
+    pw: 2.0e-05
+    modulation: BPSK
+    power: 0.8144205453273823
+  waypoints:
+  - - 694.6
+    - 3939.2
+    - 150
+    - 13.0
+  - - 365.1
+    - 2118.6
+    - 150
+    - 47.4
+  - - 35.5
+    - 297.9
+    - 75.0
+    - 81.8
+- id: 15
+  label: 突击-15
+  type: fixed_wing
+  rcs: 0.0583985955129105
+  emitter:
+    active: true
+    freq: 5800000000.0
+    pri: 0.0002
+    pw: 1.0e-05
+    modulation: QPSK
+    power: 1.4808170615966096
+  waypoints:
+  - - 694.6
+    - 3939.2
+    - 300
+    - 29.4
+  - - 360.6
+    - 2119.0
+    - 300
+    - 60.5
+  - - 26.7
+    - 298.8
+    - 150.0
+    - 91.6
+sensors:
+  radar:
+    use_config: config/sensors/radar_ku.yaml
+  eo:
+    use_config: config/sensors/eo.yaml
+  esm:
+    use_config: config/sensors/esm.yaml
+  acoustic:
+    use_config: config/sensors/acoustic.yaml

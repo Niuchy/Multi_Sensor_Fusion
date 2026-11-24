@@ -1,0 +1,11 @@
+libdir=/mnt/d/code/pxsb_backend/source/build/linux-x86/third_party/install/lib64
+includedir=/mnt/d/code/pxsb_backend/source/build/linux-x86/third_party/install/include
+enginesdir=/mnt/d/code/pxsb_backend/source/build/linux-x86/third_party/install/lib64/engines-3
+modulesdir=/mnt/d/code/pxsb_backend/source/build/linux-x86/third_party/install/lib64/ossl-modules
+
+Name: OpenSSL-libcrypto
+Description: OpenSSL cryptography library
+Version: 3.3.0
+Libs: -L${libdir} -lcrypto
+Libs.private: -ldl -pthread
+Cflags: -I${includedir}

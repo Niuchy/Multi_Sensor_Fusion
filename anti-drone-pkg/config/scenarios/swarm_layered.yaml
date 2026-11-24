@@ -1,0 +1,377 @@
+scenario:
+  name: 侦察-干扰-打击分层协同
+  description: 三层杀伤链：5架侦察前出→4架电战伴随→6架攻击机滞后进入，分层协同打击
+simulation:
+  duration: 150
+  dt: 0.05
+  seed: 84259
+targets:
+- id: 1
+  label: 侦察-1
+  type: fixed_wing
+  rcs: 0.01
+  emitter:
+    active: true
+    freq: 8000000000.0
+    pri: 0.001
+    pw: 1.0e-05
+    modulation: BPSK
+    power: 0.1
+  waypoints:
+  - - 2500.0
+    - -4330.1
+    - 400
+    - 0
+  - - 1450.0
+    - -2511.5
+    - 350
+    - 60.0
+  - - 400.0
+    - -692.8
+    - 300
+    - 120
+- id: 2
+  label: 侦察-2
+  type: fixed_wing
+  rcs: 0.01
+  emitter:
+    active: false
+    freq: 8000000000.0
+    pri: 0.001
+    pw: 1.0e-05
+    modulation: BPSK
+    power: 0.1
+  waypoints:
+  - - 4330.1
+    - -2500.0
+    - 400
+    - 0
+  - - 2511.5
+    - -1450.0
+    - 350
+    - 60.0
+  - - 692.8
+    - -400.0
+    - 300
+    - 120
+- id: 3
+  label: 侦察-3
+  type: fixed_wing
+  rcs: 0.01
+  emitter:
+    active: true
+    freq: 10000000000.0
+    pri: 0.0005
+    pw: 1.0e-05
+    modulation: BPSK
+    power: 0.1
+  waypoints:
+  - - 5000.0
+    - 0.0
+    - 400
+    - 0
+  - - 2900.0
+    - 0.0
+    - 350
+    - 60.0
+  - - 800.0
+    - 0.0
+    - 300
+    - 120
+- id: 4
+  label: 侦察-4
+  type: fixed_wing
+  rcs: 0.01
+  emitter:
+    active: false
+    freq: 8000000000.0
+    pri: 0.0008
+    pw: 5.0e-06
+    modulation: BPSK
+    power: 0.1
+  waypoints:
+  - - 4330.1
+    - 2500.0
+    - 400
+    - 0
+  - - 2511.5
+    - 1450.0
+    - 350
+    - 60.0
+  - - 692.8
+    - 400.0
+    - 300
+    - 120
+- id: 5
+  label: 侦察-5
+  type: fixed_wing
+  rcs: 0.01
+  emitter:
+    active: true
+    freq: 8000000000.0
+    pri: 0.0008
+    pw: 2.0e-06
+    modulation: BPSK
+    power: 0.1
+  waypoints:
+  - - 2500.0
+    - 4330.1
+    - 400
+    - 0
+  - - 1450.0
+    - 2511.5
+    - 350
+    - 60.0
+  - - 400.0
+    - 692.8
+    - 300
+    - 120
+- id: 6
+  label: 电战-1
+  type: fixed_wing
+  rcs: 0.5
+  emitter:
+    active: true
+    freq: 2000000000.0
+    pri: 0.0005
+    pw: 5.0e-06
+    modulation: NOISE
+    power: 10.0
+  waypoints:
+  - - 2828.4
+    - -2828.4
+    - 250
+    - 12.8
+  - - 1944.5
+    - -1944.5
+    - 200
+    - 62.8
+  - - 1060.7
+    - -1060.7
+    - 150
+    - 112.8
+- id: 7
+  label: 电战-2
+  type: fixed_wing
+  rcs: 0.5
+  emitter:
+    active: true
+    freq: 8000000000.0
+    pri: 0.0005
+    pw: 2.0e-05
+    modulation: NOISE
+    power: 10.0
+  waypoints:
+  - - 3863.7
+    - -1035.3
+    - 250
+    - 23.5
+  - - 2656.3
+    - -711.8
+    - 200
+    - 73.5
+  - - 1448.9
+    - -388.2
+    - 150
+    - 123.5
+- id: 8
+  label: 电战-3
+  type: fixed_wing
+  rcs: 0.5
+  emitter:
+    active: true
+    freq: 4000000000.0
+    pri: 0.001
+    pw: 1.0e-05
+    modulation: NOISE
+    power: 10.0
+  waypoints:
+  - - 3863.7
+    - 1035.3
+    - 250
+    - 11.7
+  - - 2656.3
+    - 711.8
+    - 200
+    - 61.7
+  - - 1448.9
+    - 388.2
+    - 150
+    - 111.7
+- id: 9
+  label: 电战-4
+  type: fixed_wing
+  rcs: 0.5
+  emitter:
+    active: true
+    freq: 2000000000.0
+    pri: 0.0005
+    pw: 1.0e-05
+    modulation: NOISE
+    power: 10.0
+  waypoints:
+  - - 2828.4
+    - 2828.4
+    - 250
+    - 10.6
+  - - 1944.5
+    - 1944.5
+    - 200
+    - 60.6
+  - - 1060.7
+    - 1060.7
+    - 150
+    - 110.6
+- id: 11
+  label: 攻击-1
+  type: fixed_wing
+  rcs: 0.10530719393677274
+  emitter:
+    active: true
+    freq: 5800000000.0
+    pri: 0.0002
+    pw: 5.0e-06
+    modulation: OFDM
+    power: 1.574029419383605
+  waypoints:
+  - - 3856.7
+    - -4596.3
+    - 200
+    - 60.1
+  - - 2019.0
+    - -2417.6
+    - 120
+    - 100.1
+  - - 181.3
+    - -239.0
+    - 50
+    - 140.1
+- id: 12
+  label: 攻击-2
+  type: fixed_wing
+  rcs: 0.2618860913355653
+  emitter:
+    active: true
+    freq: 5800000000.0
+    pri: 0.0002
+    pw: 1.0e-05
+    modulation: QPSK
+    power: 1.6382110506946508
+  waypoints:
+  - - 5638.2
+    - -2052.1
+    - 200
+    - 61.8
+  - - 2957.4
+    - -1084.2
+    - 120
+    - 101.8
+  - - 276.6
+    - -116.2
+    - 50
+    - 141.8
+- id: 13
+  label: 攻击-3
+  type: fixed_wing
+  rcs: 0.13109589996235632
+  emitter:
+    active: true
+    freq: 6000000000.0
+    pri: 0.001
+    pw: 1.0e-05
+    modulation: OFDM
+    power: 0.6533154147797731
+  waypoints:
+  - - 5908.8
+    - 1041.9
+    - 200
+    - 56.8
+  - - 3101.2
+    - 552.1
+    - 120
+    - 96.8
+  - - 293.5
+    - 62.3
+    - 50
+    - 136.8
+- id: 14
+  label: 攻击-4
+  type: fixed_wing
+  rcs: 0.2207452062733782
+  emitter:
+    active: true
+    freq: 5800000000.0
+    pri: 0.0002
+    pw: 5.0e-06
+    modulation: QPSK
+    power: 1.5945976800407269
+  waypoints:
+  - - 4596.3
+    - 3856.7
+    - 200
+    - 66.9
+  - - 2419.5
+    - 2016.5
+    - 120
+    - 106.9
+  - - 242.8
+    - 176.2
+    - 50
+    - 146.9
+- id: 15
+  label: 攻击-5
+  type: fixed_wing
+  rcs: 0.2104081262546454
+  emitter:
+    active: true
+    freq: 6000000000.0
+    pri: 0.0008
+    pw: 5.0e-06
+    modulation: QPSK
+    power: 1.366028217885143
+  waypoints:
+  - - 4914.9
+    - -3441.5
+    - 200
+    - 57.6
+  - - 2587.0
+    - -1796.3
+    - 120
+    - 97.6
+  - - 259.1
+    - -151.2
+    - 50
+    - 137.6
+- id: 16
+  label: 攻击-6
+  type: fixed_wing
+  rcs: 0.15787759272042143
+  emitter:
+    active: true
+    freq: 5800000000.0
+    pri: 0.001
+    pw: 2.0e-05
+    modulation: QPSK
+    power: 1.7829765815227203
+  waypoints:
+  - - 5437.8
+    - 2535.7
+    - 200
+    - 54.6
+  - - 2859.5
+    - 1320.3
+    - 120
+    - 94.6
+  - - 281.1
+    - 104.9
+    - 50
+    - 134.6
+sensors:
+  radar:
+    use_config: config/sensors/radar_ku.yaml
+  eo:
+    use_config: config/sensors/eo.yaml
+  esm:
+    use_config: config/sensors/esm.yaml
+  acoustic:
+    use_config: config/sensors/acoustic.yaml

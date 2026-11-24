@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>时空对齐工作台 · SB Fusion</title>
+  <link rel="stylesheet" href="/alignment.css"><script src="/alignment.js" defer></script>
+</head>
+<body>
+<header><div><div class="eyebrow">SB FUSION / ALIGNMENT LAB · V1</div><h1>时空对齐工作台</h1></div>
+  <nav><span class="badge">旁路预览 · 不改变正式融合</span><a href="/debug.html">接入诊断 ↗</a><a href="/">态势台 ↗</a></nav>
+</header>
+<main>
+  <div id="notice" role="status">正在连接调试网关…</div>
+  <p class="intro">看清时间与坐标，再验证参数。原始报文不改写，保存仅对本工作台生效；离线回放不发送 DDS，也不重跑融合滤波。</p>
+  <section class="toolbar panel">
+    <label>设备<input id="device" list="device-options" placeholder="radar_3152" value="radar_3152" pattern="radar_[0-9]{1,10}"><datalist id="device-options"></datalist></label>
+    <label>数据源<select id="mode"><option value="live">实时旁路订阅</option><option value="offline">离线文件对比</option></select></label>
+    <button id="pause">暂停显示</button><button id="capture">下载原始采集</button><button id="export-result">导出对比结果</button>
+    <span id="live-status" class="muted">尚无接收记录</span>
+  </section>
+  <section id="offline-panel" class="panel" hidden>
+    <div class="section-head"><h2>离线回放</h2><span>最多 2,000 条 / 请求 8 MiB · 只读比较</span></div>
+    <div class="file-row"><label>文件<input type="file" id="file" accept=".json,.log,.txt"></label>
+      <label>格式<select id="file-format"><option value="capture">本工作台采集 JSON</option><option value="receiver_log">Anti-Drone Receiver 解码日志（1.log）</option></select></label>
+      <button id="compare-file" class="primary">载入并对比</button></div>
+    <div id="log-context" hidden>
+      <p class="hint">解码日志没有坐标原点、站址、日期和接收时刻。下面是本次回放的基准上下文，不会写入现场配置。项目默认原点不等于真实站址，请现场核实。</p>
+      <div class="form-grid"><label>参考原点：经度 / 纬度 / 高程（° / ° / m）<input id="log-origin" placeholder="例如 120, 30, 0（必须核实）"></label>
+        <label>雷达站址 ENU（m，可留空）<input id="log-station" placeholder="东, 北, 高；未知时留空"></label>
+        <label>原始方位定义<select id="log-convention"><option value="north_cw">北零、顺时针</option><option value="enu">东零、逆时针</option></select></label></div>
+    </div>
+    <p id="file-note" class="hint">采集 JSON 保留每条记录的上下文；1.log 只使用日志中实际存在的字段。</p>
+  </section>
+  <div class="workspace">
+    <aside class="panel parameters">
+      <div class="section-head"><h2>设备预览参数</h2><span id="draft-status">未保存草稿</span></div>
+      <form id="params">
+        <fieldset><legend>01 / 时间</legend>
+          <label>预览时间源<select id="time_source"><option value="frame">设备帧时间 Frame</option><option value="unit">数据单元时间 Unit</option><option value="header">报文头时间 PXSB</option></select></label>
+          <label>确认时间基准<select id="clock_basis"><option value="unknown">未知：不计算接收时间差</option><option value="unix_ms">已确认是 Unix 毫秒</option><option value="relative_ms">相对时间 / 日内时间</option></select></label>
+          <label>时间偏移（ms）<input id="time_offset_ms" type="number" value="0" min="-3600000" max="3600000" step="any"></label>
+          <p class="hint">校正时刻 = 所选时刻 + 偏移。接收时间差混合钟差、传输和处理延迟，不是单纯网络延迟；时间补偿不移动位置。</p>
+        </fieldset>
+        <fieldset><legend>02 / 坐标</legend>
+          <label>坐标来源<select id="coordinate_mode"><option value="auto">自动：有效 L2 优先，否则 L1</option><option value="l1">强制 L1：距离 + 角度 + 站址</option><option value="l2">强制 L2：设备经纬高</option></select></label>
+          <label>站址覆盖 ENU（m，可留空）<input id="station_enu_m" placeholder="东, 北, 高；留空沿用采集配置"></label>
+          <div class="pair"><label>方位偏置（°）<input id="azimuth_bias_deg" type="number" value="0" min="-180" max="180" step="any"></label><label>俯仰偏置（°）<input id="elevation_bias_deg" type="number" value="0" min="-90" max="90" step="any"></label></div>
+          <label>距离偏置（m）<input id="range_bias_m" type="number" value="0" min="-20000" max="20000" step="any"></label>
+          <label>转换后位置偏置 ENU（m）<input id="position_bias_enu_m" value="0, 0, 0" required></label>
+          <p class="hint">L2 路径不使用站址、距离与角度补偿。ENU 偏置对 L1 / L2 均有效。沿用项目现有经纬度转换，不另换投影。</p>
+        </fieldset>
+        <button class="primary full" type="submit">更新预览</button>
+      </form>
+      <div class="version-box"><label>版本备注<input id="note" maxlength="200" placeholder="例如：站址核实，方位试调 +1°"></label>
+        <div class="pair"><button id="save">保存预览参数</button><button id="reload">载入已保存</button></div>
+        <button id="reset" class="full">恢复默认草稿</button>
+        <label>整个参数集回滚至<select id="revision"><option value="0">v0 · 全部默认</option></select></label>
+        <button id="rollback" class="full">回滚预览参数集</button>
+        <p id="version-status" class="hint">保存和回滚都生成新版本。不会改变正在运行的融合输入。</p>
+      </div>
+    </aside>
+    <div class="results">
+      <section class="metrics" aria-label="对比统计">
+        <div><span>当前样本 / 外推点</span><strong id="count">—</strong></div>
+        <div><span>Frame 间隔均值 / 抖动标准差</span><strong id="interval">—</strong></div>
+        <div><span>接收 − 校正时刻 P50 / P95</span><strong id="delta">—</strong></div>
+        <div><span>位置改变量 RMS / 最大值</span><strong id="change">—</strong></div>
+      </section>
+      <section class="panel plot-panel">
+        <div class="section-head"><h2>原始 / 校正轨迹叠加</h2><label>参考原点<select id="origin-filter" aria-label="图中参考原点"></select></label></div>
+        <div class="legend"><span class="raw">原始默认选路</span><span class="corrected">当前参数预览</span><span>ENU / m · 空心点 = 设备外推</span></div>
+        <canvas id="plot" aria-label="原始与校正 ENU 轨迹叠加图"></canvas>
+        <div id="playback"><button id="play">播放</button><select id="speed" aria-label="回放倍速"><option value="1">1×</option><option value="5">5×</option><option value="20">20×</option></select><input id="cursor" type="range" min="0" max="0" value="0" aria-label="回放位置"><span id="cursor-label">0 / 0</span></div>
+        <p id="plot-note" class="hint">同设备不同航迹不连线；不同参考原点分开显示。位置变化量不是精度评估，需独立真值验证。</p>
+      </section>
+      <section class="panel"><div class="section-head"><h2>当前记录 · 时间与坐标来源</h2><span id="record-label">—</span></div>
+        <dl id="record-details" class="details"></dl><p id="record-warning" class="hint"></p>
+      </section>
+      <section class="panel"><div class="section-head"><h2>观测记录</h2><span id="anomalies">等待数据</span></div>
+        <div class="table-wrap"><table><thead><tr><th>序号 / 航迹</th><th>Frame 时间 ms</th><th>校正时间 ms</th><th>接收差 ms</th><th>间隔 s</th><th>原始 → 校正</th><th>标记</th></tr></thead><tbody id="records"></tbody></table></div>
+        <p class="hint">显示游标前最近 60 条。重复 / 乱序是本旁路观测统计，不等于正式输入节点丢弃计数。校正时间按当前草稿重新计算。</p>
+      </section>
+    </div>
+  </div>
+  <footer>采集缓存最多 2,000 条 / 约 4 MiB，网关重启会清空。需留证时及时下载；参数历史保存在服务器配置文件中。<span id="updated"></span></footer>
+</main>
+</body></html>

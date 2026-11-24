@@ -1,0 +1,44 @@
+# Production EO settings, read at process start. Alignment Lab saves are preview-only.
+# Units: ENU metres, WGS84 degrees/metres, offsets milliseconds/degrees.
+reorder_window_ms: 200
+defaults:
+  position_enabled: true
+  position_sigma_m: 30
+  altitude_enabled: false  # enable only after checking the height datum
+  range_policy: disabled  # enable reported_positive ONLY if failure clears distance
+  angles_calibrated: false
+  azimuth_convention: north_cw
+  azimuth_offset_deg: 0
+  elevation_offset_deg: 0
+  elevation_enabled: false
+  azimuth_sigma_deg: 1
+  elevation_sigma_deg: 1
+  time_offset_ms: 0        # corrected measurement time = reported time + offset
+  station_enu: null
+  station_lla: null       # [longitude, latitude, altitude], same datum as scene
+  use_reported_station: true  # legacy compatibility; valid reported GPS now ALWAYS wins
+  max_unchanged_s: 3.5    # conservative stale suspicion, NOT a laser failure verdict
+  min_update_interval_ms: 100
+devices:  # 修改于 2026-10-28：仅新增实装光电 1112 的配置，其他设备仍使用上面的默认值。
+  "1112":  # 新增：设备号来自本批 EOTarget；只适用于本次安装位置，设备搬动后须重新核对。
+    station_lla: [120.14089150, 30.11173922, 25.9674]  # 新增：借用录制头中的雷达标定参考站址近似光电站址（用户说明相距约 2 m），非光电实测 GPS；有效报文自身 GPS 仍优先。
+    angles_calibrated: true  # 新增：经原始日志与 DJI 核对后，允许正常跟踪状态的水平方位参与融合；不代表全部报文/全方位已精确标定。
+    azimuth_convention: north_cw  # 新增设备级明确约定：北零、顺时针；本批一致观测与该约定相符，未改变全局默认。
+    azimuth_offset_deg: 0.0  # 新增设备级补偿：本批稳健试算为 -0.19°，另一段约 -0.01°；2 m 站址不确定足以解释差异，暂不施加固定偏置，绝不套用雷达 15.32° 或旧批次 162°。
+    azimuth_sigma_deg: 1.0  # 新增设备级明确值（沿用原默认）：保留 1° 初始角噪声，不能把筛选后的小残差当作全程测角精度。
+    elevation_enabled: false  # 新增设备级保护（保持关闭）：俯仰符号、安装高度基准未独立核实，本次只启用水平方位。
+    elevation_offset_deg: 0.0  # 新增设备级明确值（沿用原默认）：没有可靠俯仰校准值，不猜测补偿。
+    range_policy: disabled  # 新增设备级保护（保持关闭）：正距离不等于测距成功；本批含残留/异常距离，不用于定位。
+    altitude_enabled: false  # 新增设备级保护（保持关闭）：不把未核实高度当作目标高度量测。
+    time_offset_ms: 0  # 新增设备级明确值（沿用原默认）：未识别独立设备钟差；回放重录造成的日期差和时间伸缩不能填为固定设备时间补偿。
+# 本次依据：Mac 工程 artifacts/multiple-targets-20261028/eo_calibration.json；原 YAML 备份为该目录 eo_devices.before.yaml。
+# DGX 原配置备份保存在 artifacts/eo1112-config-20261029/；分析附件仅保留在 Mac，只同步此 YAML，不自动重启服务。
+# 数据中仍存在约 10–35° 的异常跟踪阶段，固定角度补偿无法消除；角度关联门控仍须启用。
+# Add REAL device IDs, never use another station's coordinates.
+# devices:
+#   "actual_device_id":
+#     station_lla: [measured_longitude, measured_latitude, measured_altitude]
+#     angles_calibrated: true
+#     azimuth_convention: north_cw
+#     azimuth_offset_deg: 0  # enter a separately verified correction, not guessed 162°
+#     elevation_enabled: true

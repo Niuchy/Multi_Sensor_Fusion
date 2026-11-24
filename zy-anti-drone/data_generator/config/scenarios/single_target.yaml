@@ -1,0 +1,40 @@
+# 场景：单目标简单轨迹
+scenario:
+  name: "单目标基础场景"
+  description: "一个四旋翼无人机从远处飞近"
+
+simulation:
+  duration: 90
+  dt: 0.05
+  seed: 42
+
+targets:
+  - id: 1
+    label: "DJI-Mavic3"
+    type: "quadcopter"
+    rcs: 0.01                     # m² (平均RCS)
+    emitter:
+      active: true                # 辐射源是否开机
+      freq: 2.4e9                 # Hz
+      pri: 1000e-6                # s (脉冲重复间隔)
+      pw: 10e-6                   # s (脉宽)
+      modulation: "OFDM"          # 调制类型
+      power: 0.1                  # W (发射功率)
+    waypoints:
+      - [2000, 500, 80, 0.0]     # x, y, z, time_offset
+      - [1500, 300, 80, 30.0]
+      - [800, 100, 60, 60.0]
+      - [200, 0, 40, 90.0]
+
+coordinates:
+  origin: [120.0, 30.0, 0.0]   # ENU原点对应的经度(°)、纬度(°)、海拔(m)
+
+sensors:
+  radar:
+    use_config: "config/sensors/radar_ku.yaml"
+  eo:
+    use_config: "config/sensors/eo.yaml"
+  esm:
+    use_config: "config/sensors/esm.yaml"
+  acoustic:
+    use_config: "config/sensors/acoustic.yaml"

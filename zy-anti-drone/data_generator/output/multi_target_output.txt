@@ -1,0 +1,1611 @@
+================================================================================
+  dev_proto.h 协议输出 — 多目标复杂场景 (120s)
+  雷达: radar-ku-01 | 光电: eo-01 | 电侦: esm-01 | 声探测: acoustic-01
+  ENU原点: [120.0, 30.0, 0.0] (WGS84)
+================================================================================
+
+═══ T=1s ENU(2975,-489,199) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=2 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=idle n_locked=0 pointing=Az90.0° El5.0°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.030862E, 29.995609N, 198.8m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-9.6° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.030862E, 29.995609N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=3 azimuth=37.5° elevation=30.8°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=3s ENU(2925,-466,196) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=6 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=idle n_locked=0 pointing=Az90.0° El5.0°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.030338E, 29.995815N, 196.2m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-7.4° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.030338E, 29.995815N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=54.8° elevation=3.4°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=5s ENU(2874,-443,194) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=10 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=idle n_locked=0 pointing=Az90.0° El5.0°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.029813E, 29.996021N, 193.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-9.2° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.029813E, 29.996021N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=53.8° elevation=3.3°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=7s ENU(2824,-420,191) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=14 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T2: state=confirmed hits=2
+    L1量测: range=9641dm az=5434cdeg el=327cdeg height=550dm
+    L2航迹: lng_e7=1200058207 lat_e7=300070250 alt_dm=580
+            → WGS84(120.005821E, 30.007025N, 58.0m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=slewing n_locked=0 pointing=Az59.5° El3.0°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.029288E, 29.996228N, 191.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-6.3° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.029288E, 29.996228N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=52.8° elevation=3.3°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=9s ENU(2768,-394,188) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=18 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T2: state=confirmed hits=2
+    L1量测: range=9641dm az=5434cdeg el=327cdeg height=550dm
+    L2航迹: lng_e7=1200058207 lat_e7=300070250 alt_dm=580
+            → WGS84(120.005821E, 30.007025N, 58.0m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az58.2° El3.0°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.028712E, 29.996458N, 188.3m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-9.2° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.028712E, 29.996458N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=51.8° elevation=3.2°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=11s ENU(2718,-371,186) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=22 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T2: state=confirmed hits=2
+    L1量测: range=9641dm az=5434cdeg el=327cdeg height=550dm
+    L2航迹: lng_e7=1200058207 lat_e7=300070250 alt_dm=580
+            → WGS84(120.005821E, 30.007025N, 58.0m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az57.3° El3.0°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.028198E, 29.996663N, 185.8m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-7.7° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.028198E, 29.996663N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=50.9° elevation=3.2°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=13s ENU(2669,-348,183) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=26 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=confirmed hits=2
+    L1量测: range=27368dm az=35230cdeg el=382cdeg height=1821dm
+    L2航迹: lng_e7=1200280700 lat_e7=299967148 alt_dm=1851
+            → WGS84(120.028070E, 29.996715N, 185.1m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=confirmed hits=2
+    L1量测: range=9641dm az=5434cdeg el=327cdeg height=550dm
+    L2航迹: lng_e7=1200058207 lat_e7=300070250 alt_dm=580
+            → WGS84(120.005821E, 30.007025N, 58.0m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az56.5° El3.0°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.027685E, 29.996871N, 183.3m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-7.7° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.027685E, 29.996871N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=50.1° elevation=3.2°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=15s ENU(2619,-325,181) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=30 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=confirmed hits=2
+    L1量测: range=27368dm az=35230cdeg el=382cdeg height=1821dm
+    L2航迹: lng_e7=1200280700 lat_e7=299967148 alt_dm=1851
+            → WGS84(120.028070E, 29.996715N, 185.1m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=confirmed hits=2
+    L1量测: range=9768dm az=5143cdeg el=315cdeg height=537dm
+    L2航迹: lng_e7=1200063074 lat_e7=300068497 alt_dm=567
+            → WGS84(120.006307E, 30.006850N, 56.7m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az55.7° El3.1°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.027170E, 29.997081N, 180.8m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-7.4° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.027170E, 29.997081N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=49.4° elevation=3.3°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=17s ENU(2570,-301,178) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=34 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=confirmed hits=2
+    L1量测: range=27368dm az=35230cdeg el=382cdeg height=1821dm
+    L2航迹: lng_e7=1200280700 lat_e7=299967148 alt_dm=1851
+            → WGS84(120.028070E, 29.996715N, 185.1m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=confirmed hits=2
+    L1量测: range=9768dm az=5143cdeg el=315cdeg height=537dm
+    L2航迹: lng_e7=1200063074 lat_e7=300068497 alt_dm=567
+            → WGS84(120.006307E, 30.006850N, 56.7m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az55.1° El3.1°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.026655E, 29.997293N, 178.3m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    (当前帧无检测)
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=48.7° elevation=3.4°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=19s ENU(2520,-277,176) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=38 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=confirmed hits=3
+    L1量测: range=25802dm az=35341cdeg el=388cdeg height=1746dm
+    L2航迹: lng_e7=1200265261 lat_e7=299973470 alt_dm=1776
+            → WGS84(120.026526E, 29.997347N, 177.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=confirmed hits=2
+    L1量测: range=9768dm az=5143cdeg el=315cdeg height=537dm
+    L2航迹: lng_e7=1200063074 lat_e7=300068497 alt_dm=567
+            → WGS84(120.006307E, 30.006850N, 56.7m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az54.6° El3.3°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.026139E, 29.997509N, 175.8m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-5.9° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.026139E, 29.997509N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=48.2° elevation=3.5°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=21s ENU(2470,-253,173) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=42 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=confirmed hits=3
+    L1量测: range=25802dm az=35341cdeg el=388cdeg height=1746dm
+    L2航迹: lng_e7=1200265261 lat_e7=299973470 alt_dm=1776
+            → WGS84(120.026526E, 29.997347N, 177.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=confirmed hits=2
+    L1量测: range=9768dm az=5143cdeg el=315cdeg height=537dm
+    L2航迹: lng_e7=1200063074 lat_e7=300068497 alt_dm=567
+            → WGS84(120.006307E, 30.006850N, 56.7m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az54.2° El3.5°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.025622E, 29.997729N, 173.3m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-3.9° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.025622E, 29.997729N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=47.7° elevation=3.6°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=23s ENU(2420,-228,171) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=46 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=confirmed hits=3
+    L1量测: range=25802dm az=35341cdeg el=388cdeg height=1746dm
+    L2航迹: lng_e7=1200265261 lat_e7=299973470 alt_dm=1776
+            → WGS84(120.026526E, 29.997347N, 177.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=2
+    L1量测: range=9919dm az=4860cdeg el=303cdeg height=525dm
+    L2航迹: lng_e7=1200067940 lat_e7=300066744 alt_dm=555
+            → WGS84(120.006794E, 30.006674N, 55.5m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az54.0° El3.7°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.025104E, 29.997952N, 170.8m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-5.2° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.025104E, 29.997952N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=47.3° elevation=3.9°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=25s ENU(2370,-203,168) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=50 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=confirmed hits=3
+    L1量测: range=24242dm az=35470cdeg el=395cdeg height=1671dm
+    L2航迹: lng_e7=1200249784 lat_e7=299979920 alt_dm=1701
+            → WGS84(120.024978E, 29.997992N, 170.1m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=2
+    L1量测: range=9919dm az=4860cdeg el=303cdeg height=525dm
+    L2航迹: lng_e7=1200067940 lat_e7=300066744 alt_dm=555
+            → WGS84(120.006794E, 30.006674N, 55.5m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az53.9° El4.0°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.024584E, 29.998179N, 168.3m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-3.6° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.024584E, 29.998179N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=47.0° elevation=4.1°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=27s ENU(2320,-177,166) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=54 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=confirmed hits=3
+    L1量测: range=24242dm az=35470cdeg el=395cdeg height=1671dm
+    L2航迹: lng_e7=1200249784 lat_e7=299979920 alt_dm=1701
+            → WGS84(120.024978E, 29.997992N, 170.1m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=2
+    L1量测: range=9919dm az=4860cdeg el=303cdeg height=525dm
+    L2航迹: lng_e7=1200067940 lat_e7=300066744 alt_dm=555
+            → WGS84(120.006794E, 30.006674N, 55.5m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az54.0° El4.3°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.024063E, 29.998411N, 165.8m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-3.9° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.024063E, 29.998411N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=46.7° elevation=4.4°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=29s ENU(2270,-151,163) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=58 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=confirmed hits=3
+    L1量测: range=24242dm az=35470cdeg el=395cdeg height=1671dm
+    L2航迹: lng_e7=1200249784 lat_e7=299979920 alt_dm=1701
+            → WGS84(120.024978E, 29.997992N, 170.1m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=2
+    L1量测: range=9919dm az=4860cdeg el=303cdeg height=525dm
+    L2航迹: lng_e7=1200067940 lat_e7=300066744 alt_dm=555
+            → WGS84(120.006794E, 30.006674N, 55.5m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az54.1° El4.6°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.023541E, 29.998648N, 163.3m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-4.0° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.023541E, 29.998648N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=46.7° elevation=4.8°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=31s ENU(2219,-124,161) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=62 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=confirmed hits=3
+    L1量测: range=24242dm az=35470cdeg el=395cdeg height=1671dm
+    L2航迹: lng_e7=1200249784 lat_e7=299979920 alt_dm=1701
+            → WGS84(120.024978E, 29.997992N, 170.1m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=2
+    L1量测: range=9919dm az=4860cdeg el=303cdeg height=525dm
+    L2航迹: lng_e7=1200067940 lat_e7=300066744 alt_dm=555
+            → WGS84(120.006794E, 30.006674N, 55.5m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az54.6° El5.1°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.023017E, 29.998890N, 160.8m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-4.3° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.023017E, 29.998890N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=46.7° elevation=5.2°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=34s ENU(2156,-89,158) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=67 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=2
+    L1量测: range=9919dm az=4860cdeg el=303cdeg height=525dm
+    L2航迹: lng_e7=1200067940 lat_e7=300066744 alt_dm=555
+            → WGS84(120.006794E, 30.006674N, 55.5m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az55.5° El5.7°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.022361E, 29.999201N, 157.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-0.9° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.022361E, 29.999201N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=47.0° elevation=5.7°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=36s ENU(2105,-61,155) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=71 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=2
+    L1量测: range=9919dm az=4860cdeg el=303cdeg height=525dm
+    L2航迹: lng_e7=1200067940 lat_e7=300066744 alt_dm=555
+            → WGS84(120.006794E, 30.006674N, 55.5m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az56.4° El6.1°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.021833E, 29.999456N, 155.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-0.3° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.021833E, 29.999456N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=47.5° elevation=6.1°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=38s ENU(2054,-31,153) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=75 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=2
+    L1量测: range=9919dm az=4860cdeg el=303cdeg height=525dm
+    L2航迹: lng_e7=1200067940 lat_e7=300066744 alt_dm=555
+            → WGS84(120.006794E, 30.006674N, 55.5m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az57.6° El6.5°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.021304E, 29.999718N, 152.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=-4.1° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.021304E, 29.999718N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=48.3° elevation=6.4°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=40s ENU(2003,-2,150) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=79 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=2
+    L1量测: range=9919dm az=4860cdeg el=303cdeg height=525dm
+    L2航迹: lng_e7=1200067940 lat_e7=300066744 alt_dm=555
+            → WGS84(120.006794E, 30.006674N, 55.5m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az59.0° El6.8°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.020772E, 29.999986N, 150.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=0.1° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.020772E, 29.999986N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=49.2° elevation=6.7°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=42s ENU(1951,29,148) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=83 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=2
+    L1量测: range=9919dm az=4860cdeg el=303cdeg height=525dm
+    L2航迹: lng_e7=1200067940 lat_e7=300066744 alt_dm=555
+            → WGS84(120.006794E, 30.006674N, 55.5m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az60.5° El7.0°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.020239E, 30.000262N, 147.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=2.3° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.020239E, 30.000262N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=50.5° elevation=6.9°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=44s ENU(1900,60,145) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=87 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az62.1° El7.1°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.019704E, 30.000543N, 145.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=2.1° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.019704E, 30.000543N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=3 azimuth=36.7° elevation=29.9°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=46s ENU(1848,92,143) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=91 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az63.7° El7.1°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.019168E, 30.000827N, 142.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=2.6° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.019168E, 30.000827N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=53.3° elevation=7.1°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=48s ENU(1796,124,140) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=95 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az65.2° El7.1°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.018631E, 30.001114N, 140.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=4.4° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.018631E, 30.001114N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=54.8° elevation=7.1°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=50s ENU(1744,156,138) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=99 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az66.6° El6.9°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.018095E, 30.001400N, 137.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=2 azimuth=55.1° freq=2.45GHz
+    confidence=80% 目标WGS84: 120.018095E, 30.001400N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=56.2° elevation=7.0°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=52s ENU(1693,188,135) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=103 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az67.9° El6.8°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.017559E, 30.001685N, 135.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=6.6° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.017559E, 30.001685N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=57.5° elevation=6.9°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=54s ENU(1641,219,133) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=107 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az69.0° El6.6°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.017024E, 30.001967N, 132.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=6.5° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.017024E, 30.001967N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=58.7° elevation=6.8°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=56s ENU(1590,250,130) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=111 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az70.0° El6.5°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.016490E, 30.002243N, 130.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=9.0° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.016490E, 30.002243N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=59.7° elevation=6.6°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=58s ENU(1539,280,128) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=115 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az70.8° El6.4°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.015959E, 30.002512N, 127.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=9.4° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.015959E, 30.002512N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=60.5° elevation=6.6°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=60s ENU(1488,309,125) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=119 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az71.5° El6.3°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.015430E, 30.002772N, 125.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=2 azimuth=59.8° freq=2.45GHz
+    confidence=80% 目标WGS84: 120.015430E, 30.002772N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=61.2° elevation=6.5°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=62s ENU(1437,336,123) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=123 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az72.1° El6.3°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.014904E, 30.003021N, 122.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=13.4° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.014904E, 30.003021N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=61.6° elevation=6.5°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=64s ENU(1387,363,120) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=127 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az72.7° El6.3°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.014382E, 30.003258N, 120.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=2 azimuth=61.6° freq=2.45GHz
+    confidence=80% 目标WGS84: 120.014382E, 30.003258N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=3 azimuth=38.0° elevation=31.3°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=66s ENU(1337,388,118) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=131 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az73.1° El6.4°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.013864E, 30.003481N, 117.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=14.9° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.013864E, 30.003481N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=62.0° elevation=6.6°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=68s ENU(1287,411,115) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=135 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az73.5° El6.6°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.013350E, 30.003688N, 115.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=2 azimuth=59.5° freq=2.45GHz
+    confidence=80% 目标WGS84: 120.013350E, 30.003688N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=3 azimuth=38.4° elevation=31.7°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=70s ENU(1238,432,113) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=139 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az73.9° El6.8°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.012842E, 30.003876N, 112.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=19.1° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.012842E, 30.003876N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=61.9° elevation=7.0°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=72s ENU(1190,450,110) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=143 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az74.3° El7.0°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.012340E, 30.004045N, 110.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=21.3° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.012340E, 30.004045N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=61.6° elevation=7.2°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=74s ENU(1142,467,108) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=147 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az74.7° El7.3°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.011843E, 30.004193N, 107.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=2 azimuth=60.3° freq=2.45GHz
+    confidence=80% 目标WGS84: 120.011843E, 30.004193N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=61.3° elevation=7.4°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=76s ENU(1095,481,105) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=151 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az75.1° El7.6°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.011353E, 30.004317N, 105.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=22.1° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.011353E, 30.004317N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=61.0° elevation=7.7°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=78s ENU(1048,492,103) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=155 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az75.5° El7.9°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.010871E, 30.004416N, 102.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=25.8° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.010871E, 30.004416N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=60.5° elevation=8.0°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=80s ENU(1002,500,100) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=159 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az75.9° El8.3°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.010396E, 30.004489N, 100.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=25.7° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.010396E, 30.004489N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=60.1° elevation=8.4°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=82s ENU(957,505,98) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=163 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az76.5° El8.6°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.009930E, 30.004533N, 97.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=25.5° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.009930E, 30.004533N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=3 azimuth=40.6° elevation=34.0°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=84s ENU(913,506,95) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=167 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az77.0° El9.0°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.009471E, 30.004550N, 95.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=28.9° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.009471E, 30.004550N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=59.4° elevation=9.0°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=86s ENU(870,505,93) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=171 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az77.7° El9.3°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.009020E, 30.004541N, 92.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=27.5° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.009020E, 30.004541N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=59.2° elevation=9.3°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=88s ENU(827,502,90) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=175 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az78.4° El9.6°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.008576E, 30.004507N, 90.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=30.9° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.008576E, 30.004507N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=1 azimuth=30.4° elevation=5.1°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=90s ENU(785,495,88) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=179 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az79.1° El9.9°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.008138E, 30.004450N, 87.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=30.1° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.008138E, 30.004450N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=1 azimuth=31.3° elevation=5.1°
+    class=小型高速无人机 confidence=80%
+
+═══ T=92s ENU(743,487,85) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=183 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az79.9° El10.1°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.007707E, 30.004372N, 85.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=31.3° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.007707E, 30.004372N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=1 azimuth=32.2° elevation=5.2°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=94s ENU(702,476,83) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=187 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az80.7° El10.3°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.007282E, 30.004273N, 82.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=31.2° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.007282E, 30.004273N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=1 azimuth=33.0° elevation=5.3°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=96s ENU(662,463,80) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=191 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az81.5° El10.4°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.006862E, 30.004156N, 80.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    (当前帧无检测)
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=1 azimuth=33.8° elevation=5.4°
+    class=小型高速无人机 confidence=80%
+
+═══ T=98s ENU(622,448,78) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=195 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az82.4° El10.5°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.006447E, 30.004021N, 77.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=30.9° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.006447E, 30.004021N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=1 azimuth=34.5° elevation=5.5°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=100s ENU(582,431,75) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=199 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az83.2° El10.6°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.006037E, 30.003871N, 75.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=34.8° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.006037E, 30.003871N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=1 azimuth=35.1° elevation=5.6°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=102s ENU(543,413,73) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=203 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az84.0° El10.6°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.005630E, 30.003706N, 72.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=35.3° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.005630E, 30.003706N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=60.5° elevation=10.7°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=104s ENU(504,393,70) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=207 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az84.8° El10.6°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.005228E, 30.003528N, 70.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    (当前帧无检测)
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=1 azimuth=36.3° elevation=5.9°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=106s ENU(466,372,68) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=211 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az85.6° El10.5°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.004829E, 30.003338N, 67.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=37.4° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.004829E, 30.003338N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=1 azimuth=36.9° elevation=6.0°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=108s ENU(427,349,65) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=215 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az86.3° El10.4°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.004433E, 30.003138N, 65.1m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=1 azimuth=35.0° freq=5.80GHz
+    confidence=80% 目标WGS84: 120.004433E, 30.003138N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=2 azimuth=62.2° elevation=10.7°
+    class=四旋翼/多旋翼 confidence=80%
+
+═══ T=110s ENU(389,326,63) ═══
+
+  [雷达] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(66B)=90B
+         MsgHdr: startTag=0x7E unitNums=1 msgID=219 srcAddr=101
+         UnitHdr: unitTag=0x1A01 unitLen=66
+         Frame: Magic=0xA55AA55A
+    T1: state=coasting hits=3
+    L1量测: range=22696dm az=35616cdeg el=403cdeg height=1596dm
+    L2航迹: lng_e7=1200234308 lat_e7=299986370 alt_dm=1626
+            → WGS84(120.023431E, 29.998637N, 162.6m)
+    L3识别: type=2(无人机) confidence=80%
+    T2: state=coasting hits=3
+    L1量测: range=6336dm az=5327cdeg el=713cdeg height=786dm
+    L2航迹: lng_e7=1200039003 lat_e7=300045264 alt_dm=816
+            → WGS84(120.003900E, 30.004526N, 81.6m)
+    L3识别: type=2(无人机) confidence=80%
+  [光电] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(79B)=103B
+         UnitHdr: unitTag=0x1C01 Magic=0xC33CC33C
+    state=tracking n_locked=1 pointing=Az87.0° El10.3°
+    转台WGS84: 120.001037E, 30.000000N, 10.0m
+    目标WGS84: 120.004039E, 30.002930N, 62.6m
+  [频侦] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(139B)=163B
+         UnitHdr: unitTag=0x1B01 Magic=0xB44BB44B
+    track_id=2 azimuth=61.4° freq=2.45GHz
+    confidence=80% 目标WGS84: 120.004039E, 30.002930N
+  [声探测] PXSB报文 MsgHeader(20B)+UnitHeader(4B)+Frame(67B)=91B
+         UnitHdr: unitTag=0x1D01 Magic=0xD22DD22D (含设备经纬高)
+    track_id=1 azimuth=37.9° elevation=6.5°
+    class=小型高速无人机 confidence=80%
+
+================================================================================
+  输出完成
+================================================================================

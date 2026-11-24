@@ -1,0 +1,45 @@
+# 实装专用配置；不会产生模拟目标。
+# 修改于 2026-11-13：使用 11 月 12 日雷达原始日志记录的站址作为统一参考点。
+# 这是设备报出的参考位置，非独立测绘结果；更换场地后须核对原点及各设备站址。
+# position_frame: WGS84 表示 position 为 [经度(度), 纬度(度), 高度(米)]；不是目标经纬高。
+# 程序读入后统一转换为 ENU 米；旧配置未写 position_frame 时仍按 ENU 读取。
+coordinates:
+  frame: ENU
+  origin: [120.140914917, 30.111728668, 22.0]  # 来源：2026-11-12-零八一科技-雷达.jsonl 的设备站址。
+equipment:
+  discover_only: true  # 只显示实际收到过 DDS 数据的设备，不预置演示设备列表。
+targets: []
+sensors:  # 2026-11-14 修正：顶层设备配置，与 coordinates / equipment / targets 同级。
+  radar:
+    # 雷达 3152：由本批原始日志中的设备站址填写，不使用无人机真值坐标。
+    # 当前标准 RadarTarget 无设备自身 GPS 字段；L1 极坐标回退依赖此配置。
+    position_frame: WGS84
+    position: [120.140914917, 30.111728668, 22.0]
+    error:
+      range_sigma: 10.0
+      azimuth_sigma: 0.3
+      elevation_sigma: 0.85
+  eo:
+    # 2026-11-14：无报文自身 GPS、且 eo_devices.yaml 无专用站址时，临时借用雷达站址。
+    # 非光电实测 GPS；设备 1112 仍优先使用 eo_devices.yaml 中已有的近场站址配置。
+    position_frame: WGS84
+    position: [120.140914917, 30.111728668, 22.0]
+  esm:
+    # 射频 4001：沿用用户确认的临时同址假设，借用雷达站址，非射频设备实测 GPS。
+    # 当前 ESMTarget 协议没有设备自身 GPS 字段；此处覆盖 esm.yaml 中的演示站址。
+    position_frame: WGS84
+    position: [120.140914917, 30.111728668, 22.0]
+  acoustic:
+    # 类型级备用站址：借用雷达站址，非声设备实测 GPS；未列明设备号时使用此值，须现场核对。
+    # 有效报文自身 GPS 始终优先；否则先查 devices.<设备号>，再回退到类型级 position。
+    position_frame: WGS84
+    position: [120.140914917, 30.111728668, 22.0]
+    devices:
+      "4201":  # 日志设备标识 34BD0017，型号 CRY2622M；不是目标 Point.ID。
+        # 用户确认临时借用雷达站址，非本机实测 GPS；有实测值后单独修改此行。
+        position_frame: WGS84
+        position: [120.140914917, 30.111728668, 22.0]
+      "4202":  # 日志设备标识 36BD0002，型号 CRY2622M；两台必须用不同 DDS device_id。
+        # 用户确认临时借用雷达站址，非本机实测 GPS；不能用此同址假设进行双站精确交汇。
+        position_frame: WGS84
+        position: [120.140914917, 30.111728668, 22.0]

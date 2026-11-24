@@ -1,0 +1,32 @@
+#of-open{position:fixed;right:16px;bottom:194px;z-index:45;border:1px solid #426978;border-radius:5px;background:#11242c;color:#a9ece3;padding:10px 13px;font:13px system-ui;cursor:pointer}
+#of-dialog{background:#0d1922;color:#e5edf2;border:1px solid #395565;border-radius:12px;width:min(1040px,94vw);max-height:90vh;padding:0;font:14px/1.5 system-ui;box-shadow:0 20px 80px #0009}
+#of-dialog::backdrop{background:#0009}#of-dialog *{box-sizing:border-box}
+#of-dialog header{display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#132430;padding:15px 22px;z-index:1;border-bottom:1px solid #34505f}
+#of-dialog h2{font-size:20px;margin:0}#of-dialog h3{font-size:15px;margin:14px 0 8px}
+#of-dialog .of-body{padding:14px 22px 22px}#of-dialog .of-help{color:#9eb3c0;font-size:12px;margin:7px 0}
+#of-dialog .of-banner{padding:10px 12px;border:1px solid #34505f;border-radius:6px;background:#142a34;margin:8px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+#of-dialog .of-warn{color:#ffcc80;border-color:#72572d;background:#2d261c}
+#of-dialog .of-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+#of-dialog .of-rule{padding:12px;border:1px solid #2c4553;border-radius:8px}#of-dialog .of-rule label{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+#of-dialog .of-rule-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+#of-dialog .of-rule-state{min-height:20px;margin:8px 0 12px}
+#of-dialog .of-inputs{display:flex;gap:12px;align-items:center}#of-dialog input[type=range]{flex:1;min-width:60px;accent-color:#51d6ba}#of-dialog input[type=number]{width:104px}
+#of-dialog input[type=number],#of-dialog input[type=text],#of-dialog select{border:1px solid #46606e;border-radius:4px;background:#08141d;color:#e5edf2;padding:7px;font:inherit}
+#of-dialog input[type=checkbox]{accent-color:#51d6ba}#of-dialog input:disabled{opacity:.5}
+#of-dialog button{font:inherit;border:1px solid #446170;border-radius:5px;background:#203641;color:#e5edf2;padding:7px 11px;cursor:pointer}#of-dialog button:disabled{opacity:.45;cursor:default}#of-dialog button.of-primary{background:#216d60;border-color:#3aab98}
+#of-dialog button.of-toggle{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;font-size:13px;background:#25313b;color:#bccbd5}
+#of-dialog button.of-toggle[aria-checked=true]{background:#15483f;border-color:#3aab98;color:#a9f1df}
+#of-dialog .of-toggle-track{display:inline-block;position:relative;width:30px;height:16px;border-radius:10px;background:#657784;flex-shrink:0}
+#of-dialog .of-toggle-track::after{content:"";position:absolute;left:2px;top:2px;width:12px;height:12px;border-radius:50%;background:#f1f7fa}
+#of-dialog [aria-checked=true] .of-toggle-track{background:#249b83}#of-dialog [aria-checked=true] .of-toggle-track::after{left:16px}
+#of-dialog button:focus-visible{outline:2px solid #72ddba;outline-offset:3px}
+#of-dialog .of-actions{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}#of-dialog .of-inline{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#of-dialog .of-table{overflow:auto;max-height:300px;border:1px solid #2c4553;border-radius:6px}#of-dialog table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}#of-dialog th,#of-dialog td{padding:9px 10px;text-align:left;border-bottom:1px solid #243b48}#of-dialog th{position:sticky;top:0;background:#142732}#of-dialog tr.of-blocked{color:#9aa8b1}#of-dialog .of-pass{color:#72ddba}#of-dialog code{overflow-wrap:anywhere}
+@media(max-width:650px){#of-dialog .of-grid{grid-template-columns:1fr}#of-dialog .of-body{padding:12px}#of-dialog header{padding:12px}}
+.rail.right.of-dds-labels .tlist-h,.rail.right.of-dds-labels .trow{grid-template-columns:minmax(112px,1.3fr) minmax(32px,1fr) 40px 40px;gap:5px}
+.rail.right.of-dds-labels .tlist-h>span:first-child::after{content:" / DDS";font-size:9px;letter-spacing:0}
+.rail.right.of-dds-labels .tid{white-space:nowrap}
+.rail.right.of-dds-labels .tid[data-dds-label]::after{content:" · " attr(data-dds-label);font:10px system-ui;color:#9aa8b1}
+.rail.right.of-dds-labels .tid[data-dds-state=passed]::after{color:#72ddba}
+.rail.right.of-dds-labels .tid[data-dds-state=blocked]::after{color:#ffcc80}
+.rail.right.of-dds-labels .tid[data-dds-state=error]::after{color:#ff8282}

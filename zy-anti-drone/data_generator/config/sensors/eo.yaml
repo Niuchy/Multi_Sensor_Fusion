@@ -1,0 +1,23 @@
+# 光电传感器参数
+eo:
+  id: "eo-01"
+  position: [100.0, 0.0, 10.0]  # x, y, z (m) ENU
+  orientation: [90.0, 5.0]       # 方位角, 俯仰角 (度) — 初始指向侧面，等雷达cue
+  update_rate: 30.0              # Hz (可见光帧率)
+  fov:
+    azimuth: [-4.0, 4.0]         # 方位视场 (度) — 窄视场
+    elevation: [-3.0, 3.0]       # 俯仰视场 (度)
+  max_track_range: 8000.0        # 最大跟踪距离 (m)
+  detection:
+    pd: 0.95                     # 检测概率 (良好气象)
+    min_contrast: 0.1            # 最小对比度
+  error:
+    azimuth_sigma: 0.005         # 方位随机误差 σ (度) — 角秒级
+    elevation_sigma: 0.005       # 俯仰随机误差 σ (度)
+  tracking:
+    lock_on_time: 0.5            # 锁定时间 (秒)
+    max_track_targets: 3         # 同时跟踪目标数
+    handover_delay: 1.0          # 切换目标延迟 (秒)
+  weather:
+    visibility: 10.0             # 能见度 (km)，影响检测概率
+    turbulence: "low"            # low / medium / high

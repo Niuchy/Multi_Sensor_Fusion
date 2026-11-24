@@ -1,0 +1,32 @@
+# 声探测传感器参数
+# 被动探测，通过麦克风阵列检测无人机旋翼/电机噪声
+
+acoustic:
+  id: "acoustic-01"
+  position: [-30.0, 0.0, 2.0]   # x, y, z (m) ENU，低矮布设
+  orientation: [0.0, 0.0]         # 阵列朝向 (az, el 度)
+  update_rate: 5.0                # Hz，声信号处理周期
+  fov:
+    azimuth: [-180.0, 180.0]      # 全向（圆形麦克风阵列）
+    elevation: [-20.0, 60.0]      # 俯仰覆盖
+  max_range: 1000.0               # 最大探测距离 (m)，小型无人机声学极限
+  min_range: 10.0                 # 最小距离 (m)
+  frequency_range: [50.0, 8000.0] # 频率覆盖 (Hz)
+
+  # 检测性能（被动探测，受距离和噪声影响大）
+  detection:
+    pd: 0.80                      # 标称检测概率 (近距离)
+    reference_range: 300.0        # 参考距离 (m)，Pd=0.80 的距离
+    sound_level_ref: 95.0         # 参考声压级 (dB @1m)
+
+  # 测量精度 (RMS)
+  error:
+    azimuth_sigma: 3.0            # 方位角误差 σ (°)
+    elevation_sigma: 8.0          # 俯仰角误差 σ (°)，地面阵列测高差
+    frequency_sigma: 50.0         # 频率测量误差 σ (Hz)
+
+  # 环境因素
+  environment:
+    ambient_noise_db: 30.0        # 环境噪声 (dB)，野外安静环境
+    wind_speed: 3.0               # 风速 (m/s)
+    temperature: 20.0             # 温度 (°C)，影响声速

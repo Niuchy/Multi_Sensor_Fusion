@@ -1,0 +1,11 @@
+libdir=/home/orangepi/pxsb_backend/source/3rd/lib
+includedir=/home/orangepi/pxsb_backend/source/3rd/include
+enginesdir=/home/orangepi/pxsb_backend/source/3rd/lib/engines-3
+modulesdir=/home/orangepi/pxsb_backend/source/3rd/lib/ossl-modules
+
+Name: OpenSSL-libcrypto
+Description: OpenSSL cryptography library
+Version: 3.3.0
+Libs: -L${libdir} -lcrypto
+Libs.private: -ldl -pthread
+Cflags: -I${includedir}

@@ -1,0 +1,9 @@
+libdir=/mnt/d/code/pxsb_backend/source/build/linux-x86/third_party/install/lib64
+includedir=/mnt/d/code/pxsb_backend/source/build/linux-x86/third_party/install/include
+
+Name: OpenSSL-libssl
+Description: Secure Sockets Layer and cryptography libraries
+Version: 3.3.0
+Requires.private: libcrypto
+Libs: -L${libdir} -lssl
+Cflags: -I${includedir}

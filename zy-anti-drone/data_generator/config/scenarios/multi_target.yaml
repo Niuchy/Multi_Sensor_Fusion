@@ -1,0 +1,70 @@
+# 场景：多目标复杂机动
+scenario:
+  name: "多目标复杂场景"
+  description: "三个无人机——编队飞行、单独机动、悬停侦察"
+
+simulation:
+  duration: 120
+  dt: 0.05
+  seed: 12345
+
+targets:
+  - id: 1
+    label: "固定翼-UAV-A"
+    type: "fixed_wing"
+    rcs: 0.5
+    emitter:
+      active: true
+      freq: 5.8e9
+      pri: 500e-6
+      pw: 5e-6
+      modulation: "BPSK"
+      power: 1.0
+    waypoints:
+      - [3000, -500, 200, 0.0]
+      - [2000, 0, 150, 40.0]
+      - [1000, 500, 100, 80.0]
+      - [200, 200, 50, 120.0]
+
+  - id: 2
+    label: "四旋翼-UAV-B"
+    type: "quadcopter"
+    rcs: 0.02
+    emitter:
+      active: true
+      freq: 2.45e9
+      pri: 800e-6
+      pw: 15e-6
+      modulation: "OFDM"
+      power: 0.2
+    waypoints:
+      - [500, 800, 60, 0.0]
+      - [600, 700, 60, 20.0]      # 蛇形机动
+      - [400, 500, 80, 40.0]
+      - [300, 600, 80, 60.0]
+      - [200, 400, 70, 80.0]
+      - [100, 300, 60, 120.0]     # 持续机动
+
+  - id: 3
+    label: "侦察-UAV-C"
+    type: "quadcopter"
+    rcs: 0.008
+    emitter:
+      active: false               # 保持电磁静默
+      freq: 2.4e9
+      pri: 1000e-6
+      pw: 10e-6
+      modulation: "OFDM"
+      power: 0.05
+    waypoints:
+      - [100, 100, 100, 0.0]
+      - [100, 100, 100, 60.0]     # 悬停 (同一位置)
+      - [50, 100, 120, 120.0]
+
+sensors:
+  radar:
+    use_config: "config/sensors/radar_ku.yaml"
+  eo:
+    use_config: "config/sensors/eo.yaml"
+  esm:
+    use_config: "config/sensors/esm.yaml"

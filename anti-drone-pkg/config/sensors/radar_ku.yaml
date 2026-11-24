@@ -1,0 +1,71 @@
+# 雷达探测设备 — Ku波段三坐标雷达
+# 体制：方位机械扫描 + 俯仰有源相扫
+# 用途：低空无人机探测、定位、跟踪
+
+radar:
+  id: "radar-ku-01"
+  position: [0.0, 0.0, 3.0]     # x, y, z (m) ENU，三角架架高~1.6m+设备中心
+  orientation: [0.0, 0.0]        # 初始方位角, 俯仰角 (度)
+
+  # 扫描体制
+  scan:
+    type: "mechanical"            # mechanical (机械扫描) / staring (凝视电扫)
+    azimuth_rate: 60.0            # 方位扫描速率 (°/s)，360°/6s=60°/s
+    azimuth_beamwidth: 3.6        # 方位波束宽度 (°)，Ku波段典型值
+    elevation_beamwidth: 6.0      # 俯仰波束宽度 (°)
+    scan_sector: [0.0, 360.0]     # 扫描扇区 (°)，全周[0,360]或扇区如[-60,60]
+    data_rate: 6.0                # 全周数据率 (s)，扇区扫描时等比缩短
+
+  # 频率
+  frequency: 16.0e9              # Ku波段中心频率 (Hz)
+
+  # 作用距离 (Pd=85%, Pf=1e-6, 目标=大疆精灵4 RCS≈0.01m²)
+  max_range: 5000.0              # 最大探测距离 (m)
+  min_range: 200.0               # 最小探测距离 (m)
+
+  # 覆盖空域
+  fov:
+    azimuth: [0.0, 360.0]        # 方位覆盖 (°)，机械扫描实现360°
+    elevation: [0.0, 50.0]       # 俯仰覆盖 (°)，相扫实现0°~50°
+
+  # 检测性能
+  detection:
+    pd: 0.85                     # 检测概率 (对精灵4级别目标@5000m)
+    pfa: 1.0e-6                  # 虚警概率
+    snr_threshold: 13.0          # 检测门限 SNR (dB)
+    reference_rcs: 0.01          # 参考 RCS (m²) — 精灵4
+    reference_range: 5000.0      # 参考距离 (m)
+    swerling_case: 1             # Swerling I 型起伏
+
+  # 测量精度 (RMS，取协议规定值)
+  error:
+    range_bias: 0.0              # 距离系统偏差 (m)
+    range_sigma: 10.0            # 距离随机误差 σ (m)，协议≤10m
+    azimuth_bias: 0.0            # 方位系统偏差 (°)
+    azimuth_sigma: 0.3           # 方位随机误差 σ (°)，协议≤0.3°
+    elevation_bias: 0.0          # 俯仰系统偏差 (°)
+    elevation_sigma: 0.85        # 俯仰随机误差 σ (°)，协议≤0.85°
+    doppler_sigma: 0.5           # 多普勒速度误差 σ (m/s)
+
+  # 最大测量速度
+  max_velocity: 100.0            # m/s
+
+  # 目标处理能力
+  track_capacity: 200            # 最大跟踪批数
+
+  # 杂波 (地面/海面)
+  clutter:
+    enabled: true
+    density: 5.0e-5              # 杂波密度，Ku波段较低
+    distribution: "weibull"      # Weibull 分布更匹配实测
+
+  # 干扰 (可选)
+  jammer:
+    enabled: false
+    type: "noise"
+    power: 0.0
+
+  # 环境
+  environment:
+    temperature: 25.0            # 工作温度 (°C)
+    humidity: 50.0               # 相对湿度 (%)

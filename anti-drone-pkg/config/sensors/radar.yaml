@@ -1,0 +1,35 @@
+# 雷达传感器参数
+radar:
+  id: "radar-01"
+  position: [0.0, 0.0, 5.0]     # x, y, z (m) ENU
+  orientation: [0.0, 0.0]        # 方位角, 俯仰角 (度)
+  update_rate: 10.0              # Hz
+  max_range: 5000.0              # 最大探测距离 (m)
+  min_range: 50.0                # 最小探测距离 (m)
+  fov:
+    azimuth: [-60.0, 60.0]       # 方位视场 (度)
+    elevation: [-10.0, 30.0]     # 俯仰视场 (度)
+  resolution:
+    range: 10.0                  # 距离分辨力 (m)
+    azimuth: 1.0                 # 方位分辨力 (度)
+    elevation: 2.0               # 俯仰分辨力 (度)
+  detection:
+    pd: 0.9                      # 检测概率
+    pfa: 1.0e-6                  # 虚警概率
+    snr_threshold: 13.0          # 检测门限 SNR (dB)
+  error:
+    range_bias: 0.0              # 距离偏差 (m)
+    range_sigma: 5.0             # 距离随机误差 σ (m)
+    azimuth_bias: 0.0            # 方位偏差 (度)
+    azimuth_sigma: 0.5           # 方位随机误差 σ (度)
+    elevation_bias: 0.0          # 俯仰偏差 (度)
+    elevation_sigma: 0.5         # 俯仰随机误差 σ (度)
+    doppler_sigma: 0.1           # 多普勒速度误差 σ (m/s)
+  clutter:
+    enabled: true
+    density: 1.0e-4              # 杂波密度 (per resolution cell)
+    distribution: "uniform"      # uniform / weibull / rayleigh
+  jammer:
+    enabled: false
+    type: "noise"                # noise / deception
+    power: 0.0                   # 干扰功率 (dBm)

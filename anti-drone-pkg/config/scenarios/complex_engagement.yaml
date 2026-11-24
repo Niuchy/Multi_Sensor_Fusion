@@ -1,0 +1,94 @@
+# 场景：高保真实战 — 含杂波、干扰、目标丢失
+scenario:
+  name: "复杂交战场景"
+  description: "多目标、雷达受干扰、光电受天气影响、电侦间歇截获"
+
+simulation:
+  duration: 150
+  dt: 0.05
+  seed: 99999
+
+targets:
+  - id: 1
+    label: "攻击-UAV-1"
+    type: "fixed_wing"
+    rcs: 0.3
+    emitter:
+      active: true
+      freq: 6.0e9
+      pri: 200e-6
+      pw: 2e-6
+      modulation: "QPSK"
+      power: 2.0
+    waypoints:
+      - [4000, -1000, 300, 0.0]
+      - [2500, -500, 250, 50.0]
+      - [1500, 0, 200, 100.0]
+      - [500, 200, 100, 150.0]
+
+  - id: 2
+    label: "侦察-UAV-2"
+    type: "quadcopter"
+    rcs: 0.005              # 低RCS，雷达难以探测
+    emitter:
+      active: false         # 电磁静默
+      freq: 2.4e9
+      pri: 500e-6
+      pw: 20e-6
+      modulation: "OFDM"
+      power: 0.1
+    waypoints:
+      - [200, 1500, 50, 0.0]
+      - [300, 1200, 50, 40.0]
+      - [400, 800, 60, 80.0]
+      - [350, 400, 70, 120.0]
+      - [200, 150, 80, 150.0]    # 继续侦察飞行
+
+  - id: 3
+    label: "自杀-UAV-3"
+    type: "fixed_wing"
+    rcs: 0.1
+    emitter:
+      active: true
+      freq: 5.8e9
+      pri: 1000e-6
+      pw: 8e-6
+      modulation: "CW"     # 末段锁定后切换为连续波
+      power: 0.5
+    waypoints:
+      - [3000, 2000, 400, 0.0]
+      - [2000, 1500, 300, 30.0]
+      - [800, 600, 200, 70.0]
+      - [0, 0, 50, 100.0]   # 直冲传感器部署点 — 撞击
+
+sensors:
+  radar:
+    use_config: "config/sensors/radar_ku.yaml"
+    position: [0, 0, 5]
+    update_rate: 10
+    jammer:
+      enabled: true
+      type: "noise"
+      power: -30.0          # 噪声干扰
+    error:
+      range_bias: 2.0
+      range_sigma: 8.0
+      azimuth_sigma: 0.8
+      elevation_sigma: 0.8
+      doppler_sigma: 0.2
+
+  eo:
+    position: [100, 0, 10]
+    update_rate: 25
+    weather:
+      visibility: 5.0       # 能见度差
+      turbulence: "medium"
+    error:
+      azimuth_sigma: 0.02
+      elevation_sigma: 0.02
+
+  esm:
+    position: [-50, 0, 8]
+    update_rate: 0.5        # 慢速扫描
+    detection:
+      poi: 0.6              # 截获概率降低

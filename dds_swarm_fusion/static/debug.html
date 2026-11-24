@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>设备接入诊断 · SB Fusion</title>
+  <link rel="stylesheet" href="/debug.css">
+  <script src="/debug.js" defer></script>
+</head>
+<body>
+<header><div><span class="eyebrow">SB FUSION / LIVE DIAGNOSTICS</span><h1>设备接入诊断</h1></div>
+  <div class="header-actions"><span id="connection" class="pill">正在连接…</span><button id="pause">暂停显示</button><a href="/alignment.html">时空对齐 ↗</a><a href="/">返回态势台 ↗</a></div></header>
+<main>
+  <p class="intro">每秒刷新 · 直接查看融合进程的接收与处理状态。节点心跳正常不代表雷达已有数据。</p>
+  <div id="notice" class="notice">等待诊断心跳。即使尚无融合航迹，也会显示接收状态。</div>
+  <section class="stages" id="stages" aria-label="处理链路"></section>
+  <section class="panel"><div class="section-head"><h2>DDS 设备输入</h2><span>计数由输入节点采集 · 进程重启后重新累计</span></div>
+    <div class="table-wrap"><table><thead><tr><th>设备 Topic</th><th>接收状态</th><th>报文 / 解析目标</th><th>平均报文 Hz</th><th>距最后接收</th><th>解析错误</th></tr></thead><tbody id="topics"></tbody></table></div>
+  </section>
+  <section class="panel"><div class="section-head"><h2>设备自身站址 / GPS 来源</h2><span>仅列出已接收设备 · 不是目标或遥控器 GPS</span></div>
+    <div class="table-wrap"><table><thead><tr><th>设备</th><th>实际采用来源</th><th>经度 / 纬度（°）</th><th>高度（m）</th><th>东 / 北 / 上（m）</th><th>选择原因与配置路径</th><th>参考原点经纬高</th><th>距接收（s）</th></tr></thead><tbody id="device-stations"></tbody></table></div>
+    <p class="intro">报文设备 GPS 有效时优先使用；否则回退 config。config ENU 换算的经纬高不是实测 GPS，必须核对现场配置；配置来源不代表已完成标定。</p>
+  </section>
+  <div class="two-col">
+    <section class="panel"><div class="section-head"><h2>当前设备数据</h2><span id="input-mode">—</span></div><div id="samples" class="samples"></div></section>
+    <section class="panel"><div class="section-head"><h2>接收位置预览</h2><span>ENU / 米 · 自动适配视野</span></div><canvas id="scope" aria-label="已接收雷达位置预览"></canvas><p class="legend"><i></i>真实点 <i class="amber"></i>设备外推点 · 位置来自报文，不代表融合确认</p></section>
+  </div>
+  <section class="panel"><div class="section-head"><h2>光电融合与双站交汇</h2><span id="eo-config">—</span></div>
+    <div class="table-wrap"><table><thead><tr><th>设备 / 目标</th><th>当前观测类型</th><th>站址</th><th>关联融合 ID</th><th>最近位置 / 距离时刻</th><th>质量提示</th></tr></thead><tbody id="eo-status"></tbody></table></div>
+    <p id="eo-geometry" class="intro"></p>
+  </section>
+  <section class="panel"><div class="section-head"><h2>航迹与输出</h2><span id="tracking-note">等待跟踪节点</span></div>
+    <div class="table-wrap"><table><thead><tr><th>融合 ID / 设备航迹号</th><th>来源</th><th>状态</th><th>东 / 北 / 高（m）</th><th>置信度</th><th>设备报告时间戳</th><th>真实量测时间戳</th></tr></thead><tbody id="tracks"></tbody></table></div>
+  </section>
+  <section class="panel"><div class="section-head"><h2>最近接入记录</h2><span>最多保留 100 条 · 新数据在前</span></div>
+    <div class="table-wrap history"><table><thead><tr><th>本机接收时间</th><th>设备 / 目标</th><th>源时间戳（ms）</th><th>同目标间隔</th><th>距离 / 方位</th><th>数据标记</th></tr></thead><tbody id="history"></tbody></table></div>
+  </section>
+  <details class="panel"><summary>原始诊断 JSON / 最近报文头（十六进制）</summary><pre id="raw"></pre></details>
+  <footer>仅查看数据；“暂停显示”不会暂停雷达接收或融合处理。<span id="updated"></span></footer>
+</main>
+<link rel="stylesheet" href="/output-filter.css?v=20261124-switches1">
+<script defer src="/output-filter.js?v=20261124-switches1"></script>
+</body></html>

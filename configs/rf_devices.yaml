@@ -1,0 +1,26 @@
+# 频侦型号补充分类；进程启动时加载，SB_RF_CONFIG 可指定其他文件。
+# 只补充可靠关联的雷达未知类别，不覆盖雷达/光电/声学已有有效类别。
+# 不改变站址、方位约定和 0° 占位过滤，不修改设备或 FusionMultiTarget 协议。
+defaults:
+  enabled: true
+  drone_models: []  # 未登记的设备/型号不推断为无人机；禁止通配符/子串匹配。
+  min_confidence: 0.5  # 工程保护门限(0~1)，不是实测准确率；0/缺失/非法置信度不采用。
+  confirm_reports: 3  # 已确认频侦航迹连续三份新报文，无歧义地关联到同一雷达航迹。
+  max_gap_ms: 5000  # 两次分类证据的最大间隔；断续或型号/关联变化重新计数。
+  max_age_ms: 12000  # 最后有效证据超过 12s，撤销频侦补充类别；不删除雷达航迹。
+devices:
+  "4001":
+    # 来自 2026-11-13 频侦日志及合并回放中的完整型号字符串。
+    # 多种机型候选只支持“无人机”大类，不意味着已唯一确定机型或本次试验目标。
+    drone_models:
+      - Dji_Mavic3_T/Dji_Air3
+      - Mini4Pro_L
+      - Dji_Air3_H
+      - Dji_Mavic3_T/Dji_Air3/L
+      - Dji_Air3_L
+      - Mavic_2/Phantom4_Pro_V2.0/M300
+      - Dji_Mavic_3/Dji_Air_2s
+      - Dji_Avata
+    # Dji_control、Air3_L_control/Mini4_Pro_controlDJI_CONTROL 是遥控端标识，排除。
+    # FanShuang-FreqDetect、12345、频段、空值均不提供无人机类别证据。
+    # 32 字节满长型号可能已被 DDS 截断，保守排除；需要先核对上游完整语义。

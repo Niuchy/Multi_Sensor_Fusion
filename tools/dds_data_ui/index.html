@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>DDS 数据录制与回放</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<header><div><div class="eyebrow">SB FUSION / INDEPENDENT DATA TOOL</div><h1>DDS 数据录制与回放</h1></div><div class="header-right"><span id="connection" class="badge">等待连接</span><button id="logout" class="quiet" hidden>退出登录</button></div></header>
+<main>
+  <section id="login-panel" class="panel login">
+    <div class="eyebrow">本地调试 · 受控访问</div><h2>连接数据工具</h2>
+    <p>在 DGX / RK3588 终端运行 <code>./dds_data_web.sh</code>，将终端显示的访问口令填在这里。</p>
+    <form id="login-form"><label for="access-key">访问口令</label><input id="access-key" type="password" required autocomplete="current-password"><button type="submit" class="primary">进入工作台</button></form>
+    <p class="muted">界面独立于融合服务。口令用于防止误操作；HTTP 未加密，仅在可信调试局域网使用。</p>
+  </section>
+  <div id="notice" role="status" aria-live="polite" hidden></div>
+  <div id="workspace" hidden>
+    <div class="intro"><p>录下设备原始报文，再按接收节奏发送到 DDS。<br><span class="muted">不启动融合、不修改融合输出协议。打开界面不会自动录制或发送。</span></p><span class="badge">独立程序 · 单任务运行</span></div>
+    <div id="runtime-note" class="callout" hidden></div>
+    <section class="panel task-panel" aria-labelledby="task-title">
+      <div class="section-head"><div><div class="eyebrow">CURRENT TASK</div><h2 id="task-title">暂无任务</h2></div><button id="stop" class="danger" disabled>停止当前任务</button></div>
+      <div class="metrics"><div><span>任务状态</span><strong id="task-state">空闲</strong></div><div><span id="count-label">收包 / 发送调用</span><strong id="task-count">—</strong></div><div><span>运行时长</span><strong id="task-elapsed">—</strong></div><div><span>录制文件大小</span><strong id="task-size">—</strong></div></div>
+      <progress id="task-progress" max="100" value="0" aria-label="回放包数进度"></progress><p id="task-detail" class="muted">请选择录制，或先选一个录制文件进行预检查。</p>
+      <div id="topic-counts" class="topic-counts"></div>
+      <div id="record-download" class="download-panel" hidden><strong>最近一次录制</strong><code id="last-record-path"></code><a id="last-download" class="download-button">下载到 Mac</a><span id="last-record-note" class="footnote"></span></div>
+    </section>
+    <div class="operations">
+      <section class="panel" aria-labelledby="record-title">
+        <div class="section-head"><div><div class="eyebrow">01 / RECORD</div><h2 id="record-title">录制设备数据</h2></div><span class="badge teal">只读订阅</span></div>
+        <p class="muted">可与融合同时运行；只保存收到的应用原始报文，不向设备发送命令。</p>
+        <form id="record-form">
+          <label for="record-directory">保存目录（DGX / RK3588 设备上）</label><div class="with-button"><input id="record-directory" readonly><button id="record-browse" type="button" class="quiet">选择目录</button></div>
+          <label for="record-name">保存文件名</label><div class="with-button"><input id="record-name" required maxlength="117" autocomplete="off"><button id="new-name" type="button" class="quiet">新名字</button></div>
+          <p class="footnote path-preview">将保存到：<code id="record-path">等待连接</code></p>
+          <fieldset id="record-topics"><legend>订阅 Topic</legend><label><input type="checkbox" value="RadarTarget" checked> 雷达 <code>RadarTarget</code></label><label><input type="checkbox" value="ESMTarget"> 侦察 <code>ESMTarget</code></label><label><input type="checkbox" value="EOTarget"> 光电 <code>EOTarget</code></label><label><input type="checkbox" value="AcousticTarget"> 声学 <code>AcousticTarget</code></label></fieldset>
+          <div class="two-fields"><div><label for="duration">录制时长（秒）</label><input id="duration" type="number" min="0" max="604800" value="60" required><small>0 = 手动停止或达到大小上限</small></div><div><label for="max-mib">大小上限（MiB）</label><input id="max-mib" type="number" min="1" max="512" value="256" required><small>达到上限后自动保存结束</small></div></div>
+          <button id="record" type="submit" class="primary full">开始录制</button>
+        </form>
+        <p class="footnote">默认只录雷达，可勾选其他输入。同名文件不会覆盖。0 包表示本工具未收到数据，不代表融合输入状态。</p>
+      </section>
+      <section class="panel" aria-labelledby="replay-title">
+        <div class="section-head"><div><div class="eyebrow amber-text">02 / REPLAY</div><h2 id="replay-title">发送录制数据</h2></div><span class="badge amber">会向 DDS 发包</span></div>
+        <form id="replay-form">
+          <label for="replay-directory">文件位置（DGX / RK3588 设备上）</label><div class="with-button"><input id="replay-directory" readonly><button id="replay-browse" type="button" class="quiet">选择录制文件</button></div>
+          <label for="replay-file">录制文件</label><select id="replay-file"><option value="">请先录制或上传 .jsonl 文件</option></select>
+          <p class="footnote path-preview">当前选择：<code id="replay-path">尚未选择</code></p>
+          <div class="two-fields"><div><label for="time-mode">时间策略</label><select id="time-mode"><option value="original">原时间 / 应用字节不变</option><option value="rebase">重定位到当前时间</option></select></div><div><label for="speed">发送倍速</label><select id="speed"><option value="0.5">0.5 ×</option><option value="1" selected>1 ×（推荐联调）</option><option value="2">2 ×</option><option value="5">5 ×</option><option value="10">10 ×</option></select></div></div>
+          <p id="time-hint" class="footnote">原时间：所有应用报文字节不变。旧时间戳可能被已有融合状态丢弃。</p>
+          <fieldset id="replay-topics"><legend>回放 Topic（只发送文件中存在的所选类型）</legend><label><input type="checkbox" value="RadarTarget" checked> 雷达</label><label><input type="checkbox" value="ESMTarget" checked> 侦察</label><label><input type="checkbox" value="EOTarget" checked> 光电</label><label><input type="checkbox" value="AcousticTarget" checked> 声学</label></fieldset>
+          <label class="check-line"><input id="allow-incomplete" type="checkbox"> 显式恢复未完成文件（仅取通过校验的可恢复部分）</label>
+          <button id="check" type="submit" class="secondary full">① 预检查文件 · 不发送 DDS</button>
+          <div id="check-result" class="check-result">尚未预检查。先确认文件、时间策略与 Topic。</div>
+          <label class="check-line safety"><input id="isolated" type="checkbox"> 我已停止 / 隔离实装设备及其他仿真发布者，允许本工具向 DDS 发送测试数据。</label>
+          <button id="replay" type="button" class="send full" disabled>② 确认并发送 DDS</button>
+        </form>
+        <p class="footnote">只播放一轮，不循环。发送前至少检查 4 秒输入静默；发现混流即停止。此检查不能代替物理隔离。</p>
+      </section>
+    </div>
+    <section class="panel" aria-labelledby="files-title">
+      <div class="section-head"><div><div class="eyebrow">CAPTURE LIBRARY</div><h2 id="files-title">录制文件</h2></div><div class="button-row"><button id="library-browse" class="quiet">切换目录</button><button id="refresh" class="quiet">刷新列表</button></div></div>
+      <p class="muted">保存在运行本工具的主机上：<code id="directory"></code></p>
+      <div class="upload-bar"><div><label for="upload-file">从 Mac 上传已有录制到上方设备目录</label><input id="upload-file" type="file" accept=".jsonl"></div><button id="upload" class="secondary">上传并校验</button><span id="upload-status" class="muted" aria-live="polite"></span></div>
+      <p class="footnote">仅接受本工具的 .jsonl 原始录制，最大 512 MiB；1.log 解码文本不能直接上传回放。同名文件不会覆盖。下载到 Mac 后设备原文件仍保留；Mac 的保存位置由浏览器下载设置或保存对话框决定。</p>
+      <div class="table-scroll"><table><thead><tr><th>文件</th><th>大小</th><th>修改时间</th><th>操作</th></tr></thead><tbody id="files-body"></tbody></table></div><p id="files-note" class="footnote"></p>
+    </section>
+    <section class="panel"><div class="section-head"><div><div class="eyebrow">TASK LOG</div><h2>当前 / 最近任务日志</h2></div><span class="muted">最近 160 条 · 自动刷新</span></div><pre id="logs" tabindex="0">暂无任务日志。</pre></section>
+    <footer>关闭浏览器或退出登录不会停止任务。停止请用上方按钮；退出服务会停止它自己的录制 / 回放子进程。<br>DDS 发送调用成功不等于融合已接收，请到融合接入诊断页核对。界面不自动启停融合服务。</footer>
+  </div>
+</main>
+<dialog id="confirm-dialog"><h2>确认向 DDS 发送？</h2><p id="confirm-details"></p><p class="callout">数据会进入同一 DDS 网络的订阅者。请再次确认其他设备输入已停止 / 隔离；本工具不会替你停止它们。</p><p class="muted">观察融合时请自行启动装备数据模式，避免内置仿真混入。重复测试的融合状态由你自行清理或重启。</p><div class="dialog-actions"><button id="cancel-send" class="quiet">取消</button><button id="confirm-send" class="send">确认发送 DDS</button></div></dialog>
+<dialog id="file-browser" class="file-browser" aria-labelledby="browser-title">
+  <div class="section-head"><h2 id="browser-title">选择设备目录</h2><button id="browser-close" class="quiet" type="button">关闭</button></div>
+  <p class="muted">这里浏览的是运行工具的 DGX / RK3588，不是 Mac。选择文件不会发送 DDS。</p>
+  <label for="browser-roots">允许访问的位置</label><select id="browser-roots"></select>
+  <form id="browser-go"><label for="browser-address">设备目录路径</label><div class="with-button"><input id="browser-address" autocomplete="off" required><button type="submit" class="secondary">前往</button><button id="browser-up" type="button" class="quiet">上一级</button></div></form>
+  <p id="browser-error" class="browser-error" role="status" hidden></p><p id="browser-info" class="footnote"></p>
+  <div id="browser-list" class="browser-list"></div>
+  <form id="browser-mkdir"><label for="browser-folder-name">在当前目录新建文件夹</label><div class="with-button"><input id="browser-folder-name" maxlength="80" placeholder="例如：radar_20261014" required><button type="submit" class="quiet">新建</button></div></form>
+  <div class="dialog-actions"><button id="browser-use" class="primary" type="button">使用此目录</button></div>
+</dialog>
+</body></html>

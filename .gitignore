@@ -1,0 +1,30 @@
+# Python
+**/__pycache__/
+*.py[cod]
+
+# Local environment / runtime
+.rk3588-env/
+*.log
+*.pid
+
+# macOS
+.DS_Store
+**/.DS_Store
+__MACOSX/
+.~lock.*
+
+# Build outputs
+**/build/
+**/*.o
+
+# Local debug captures and analysis output (not part of the source tree).
+artifacts/
+
+# Vendor archives: the unpacked source tree is tracked instead.
+zy-anti-drone/data_generator/anti-drone-pkg*.tar.gz
+
+# Packaged copy of zy-anti-drone; tracked source lives in zy-anti-drone/.
+anti-drone-pkg/thirdparty/
+anti-drone-pkg/bridge/*.so
+anti-drone-pkg/tools/dds_log_reader
+anti-drone-pkg/tools/dds_receiver
