@@ -1,306 +1,233 @@
-# SB Fusion 3588
+# Multi Sensor Fusion
 
-SB Fusion 在 **RK3588 + Kylin V10（ARM64/AArch64）** 平台上的适配版本。
-项目由原 NVIDIA DGX Spark 版本迁移而来，支持接收装备发布的 DDS 数据，
-完成数据归一化、目标跟踪和多源融合，并通过 Web 页面及 WebSocket 输出融合结果。
+多传感器目标跟踪与融合系统，面向低空目标监测、装备联调和融合算法验证。
 
-单台 3 秒环扫实装请看 [RK3588 实装调试说明](RK3588_EQUIPMENT_DEBUG.md)。
-当前本地源码包含 DDS 接入诊断、设备航迹接续、代理绕过及正式 DDS 封装修复；
-Linux 原生库必须上板重新构建，不代表已经完成 RK3588 实机验收。
+系统统一接入雷达、光电、射频与声学设备的 DDS 探测数据，对目标坐标、测向观测、设备航迹和类别信息进行归一化、关联与融合，提供正式 DDS 输出、WebSocket 接口和可视化调试工具。同时配套数据录制回放、实装特性仿真和多目标评价，支持从现场数据采集到算法验证的完整工作流程。
 
-## 主要功能
+仓库内部分脚本和界面沿用 **SB Fusion** 名称。当前部署脚本重点适配 **RK3588 / Linux ARM64**；原生构建入口也支持 Linux x86_64。实际可用性取决于目标系统、第三方 DDS 库和现场协议配置，不代表所有平台均已完成实机验收。
 
-- RK3588/AArch64 原生 DDS 桥接库构建与架构校验
-- 项目内独立 Conda 环境，不替换系统 Python、glibc 或系统编译器
-- 直接接收装备 DDS 数据，不启动本地仿真器
-- 多传感器目标跟踪与融合
-- FastAPI Web 页面、健康检查和融合结果 WebSocket
-- 保留内置仿真模式，便于离线联调
-- 独立 DDS 录制/回放工具及网页界面，不启动融合、不改融合输出协议
-- 独立实装仿真控制页：1～10 架无人机、单/双光电及指定跟踪对象
-- 多目标离线评价：匹配精确率、覆盖率、F1、RMSE/P95、漏航迹及 ID 连续性
-- 光电坐标/距离/纯测向分路融合、双站几何检查与设备自身 GPS 来源诊断
+## 核心能力
 
-## 数据流程
+- **多源数据接入**：订阅 `RadarTarget`、`EOTarget`、`ESMTarget`、`AcousticTarget`，展示接收计数、协议解析、数据时效和设备自身 GPS 来源。
+- **低频雷达航迹接续**：支持按设备号与设备航迹号接续 L2 航迹，适应约 3 秒周期和正常时间抖动，区分真实量测、设备外推与本系统预测。
+- **多模式光电融合**：分别处理有效目标坐标、有效距离与角度、纯测向观测；支持单光电辅助跟踪和双光电几何交汇检查。
+- **类别证据融合**：雷达的未知类别不抵消其他传感器的有效分类；符合型号白名单、时效与无歧义关联条件的射频证据，可补充雷达未知类别。
+- **可控的结果发布**：正式 DDS 输出支持点数、速度上下限及相对雷达高度筛选；各项可独立开关，支持临时应用和保存启动配置。
+- **可复现的调试验证**：提供独立 DDS 录制回放、时间与坐标观测工作台、1～10 目标实装特性仿真，以及匹配精确率、覆盖率、F1、位置误差和身份连续性等评价指标。
+
+## 系统组成
 
 ```text
-装备 DDS 数据
-    │
-    ▼
-company_input（数据接收与归一化）
-    │
-    ▼
-tracking（目标跟踪）
-    │
-    ▼
-fusion（多源融合）
-    ├── Web 页面 / HTTP API
-    └── WebSocket 融合结果
+实装设备 / 独立 DDS 回放 / 仿真数据源
+                    │
+                    ▼
+          DDS 接收与协议归一化
+                    │
+                    ▼
+          单源跟踪与设备航迹接续
+                    │
+                    ▼
+           多源关联、跟踪与类别融合
+                    │
+          ┌─────────┴──────────┐
+          ▼                    ▼
+     正式 DDS 输出筛选      内部航迹与诊断数据
+          │                    │
+          ▼                    ▼
+   FusionMultiTarget      Web 态势 / HTTP API
+                         外部 WebSocket
 ```
 
-## 运行环境
+正式 DDS 输出筛选不删除内部航迹，也不筛掉 Web 态势或外部 WebSocket 中的航迹。因此，**“界面可见”不等于“正式 DDS 已放行”**。主界面的航迹编号旁会标注放行、拦截或待确认状态；发送接口成功也不等于下游已接收，联调需核对接收端。
 
-- 硬件：Rockchip RK3588
-- 操作系统：Kylin V10，Linux AArch64
-- Python：3.10 及以上，初始化脚本默认安装 Python 3.12
-- 环境管理：ARM64 版 Miniconda/Conda
-- 网络：装备与 RK3588 之间的 DDS 网络需要互通
+## 快速开始
 
-项目在设备上的推荐目录：
-
-```text
-/home/kylin/sb_fusion_2
-```
-
-## 首次部署
-
-将当前更新后的项目复制到板端，并安装 ARM64 版 Miniconda 后执行。
-此次改动仅在本地，未自动提交/推送到远端仓库，重新克隆旧仓库不包含这些修改。
+### 1. 获取代码与准备环境
 
 ```bash
-cd /home/kylin/sb_fusion_2
-chmod +x setup_rk3588.sh build_native.sh start_sb_fusion.sh \
-  start_equipment_fusion.sh replay_radar_dds.sh
-./setup_rk3588.sh
+git clone https://github.com/Niuchy/Multi_Sensor_Fusion.git
+cd Multi_Sensor_Fusion
 ```
 
-`setup_rk3588.sh` 会：
+原生 DDS 整套服务运行在 Linux 上，需要 Python 3.10 或以上、C++ 编译器及对应架构的 DDS 动态库。推荐使用独立 Python 环境；RK3588 初始化脚本默认创建 Python 3.12 环境。
 
-1. 在项目内创建 `.rk3588-env` 隔离环境；
-2. 安装 Python 运行依赖和 AArch64 C++ 编译器；
-3. 在 RK3588 本机重新构建 DDS 原生桥接库；
-4. 检查 Python 依赖和动态库链接状态。
-
-## 启动装备数据模式
-
-实际接收装备数据时，直接运行：
+在 RK3588 / Kylin V10 上，先安装 ARM64 版 Miniconda/Conda，再执行：
 
 ```bash
-cd /home/kylin/sb_fusion_2
-./start_equipment_fusion.sh
+bash setup_rk3588.sh
 ```
 
-这是实装环境推荐的启动方式。它会启动 DDS 数据接收、目标跟踪、融合、
-Web 服务和融合结果 WebSocket，**不会启动项目内置仿真器**。
-启动前按现场填写 `configs/equipment.yaml` 的参考点和安装位置；每次启动
-会先构建实装所需融合桥接库，避免仍加载旧版 `.so`。
+脚本在工程内创建 `.rk3588-env`，安装依赖和编译工具，并在目标机器上构建实装 DDS 桥接库。不替换系统 Python、glibc 或系统编译器。首次安装需要可用的软件源；不要直接把其他平台的 `.so` 当成本机可用库。
 
-默认服务地址：
-
-- Web 页面：`http://<RK3588-IP>:8000/`
-- 接入诊断：`http://<RK3588-IP>:8000/debug.html`
-- 健康检查：`http://<RK3588-IP>:8000/health`
-- 融合结果 WebSocket：`ws://<RK3588-IP>:11409/ws/main`
-
-例如设备地址为 `192.168.8.76` 时，Web 页面为：
-
-```text
-http://192.168.8.76:8000/
-```
-
-按 `Ctrl+C` 可停止整套服务及其子进程。
-
-## 独立数据录制与 DDS 回放界面
-
-本地 RK3588 部署目录已包含此功能。在现有板端项目中执行：
+其他 Linux 环境可在准备好独立 Python 环境与 C++ 编译器后执行：
 
 ```bash
-cd /home/kylin/code/sb_fusion_2
-bash ./dds_data_web.sh
+python -m pip install -r dds_swarm_fusion/requirements-dds.txt
+bash build_native.sh --equipment-only
 ```
 
-访问 `http://192.168.8.76:8010/`，输入启动终端显示的访问口令。可开始/停止录制、
-选择录制保存目录、选择不同位置的录制文件、预检查并通过 DDS 回放。
-默认保存在板端项目的 `recordings/`；录制完成后点“下载到 Mac”即可复制到浏览器所在电脑，板端原件保留。
-目录选择器浏览的是设备端；Mac 文件也可先上传到当前选择的设备目录。额外数据盘目录可用 `--storage-root /实际目录` 开放。
-这是独立程序，不占用融合页面的 8000 端口，也不会自动启停融合。
+Mac 可用于源码维护、离线数据分析和测试，不支持通过仓库附带的 Linux DDS 动态库运行原生收发链路。
 
-本功能只更新 Python、Shell、网页文件；板端已有 DDS 桥可用时无需重编译。
-增量同步请保留板端 `.so`、环境目录、现场配置和已有录制数据。
-本次目录选择升级只需更新 `tools/dds_data_web.py` 和 `tools/dds_data_ui/`，任务结束后手动重启独立数据工具即可，不需要重启融合。
-完整文件清单与操作步骤见 [DDS 数据录制与回放说明](DDS_DATA_TOOL.md)。
-真正回放前必须停止或隔离其他设备输入；发送调用数不代表融合已接收。
+### 2. 核对现场配置
 
-## 启动仿真联调模式
+启动前必须核对设备编号、参考原点、安装站址、角度约定和时间基准。仓库中的历史现场配置仅供参考，不能直接视为新现场的实测参数。
 
-### 独立实装特性仿真（新增）
+| 配置文件 | 用途 |
+| --- | --- |
+| [`configs/equipment.yaml`](configs/equipment.yaml) | 实装参考原点、设备布站与输入配置 |
+| [`configs/eo_devices.yaml`](configs/eo_devices.yaml) | 各光电设备的坐标、测角、距离有效性与时间补偿策略 |
+| [`configs/rf_devices.yaml`](configs/rf_devices.yaml) | 射频型号白名单、分类证据确认与过期策略 |
+| [`configs/output_filter.yaml`](configs/output_filter.yaml) | 正式 DDS 输出筛选开关与阈值 |
+| [`configs/field_simulator.json`](configs/field_simulator.json) | 独立实装特性仿真的默认参数 |
 
-本地 Mac 工程已同步此功能；板端尚未部署。复制到 RK3588 后运行：
+设备报文提供有效的**设备自身 GPS**时优先采用，否则回退至配置文件，并在日志和诊断页标明来源。目标 GPS、遥控端 GPS 不能当作设备安装位置。
+
+### 3. 启动实装接入
+
+在工程根目录执行：
 
 ```bash
-cd /home/kylin/code/sb_fusion_2
+bash start_equipment_fusion.sh
+```
+
+该入口启动设备输入、跟踪、融合、Web 网关和外部 WebSocket，**不启动内置仿真器**。默认读取 `configs/equipment.yaml`；选择其他现场配置时：
+
+```bash
+bash start_equipment_fusion.sh --scenario /absolute/path/site.yaml
+```
+
+装备入口会执行实装桥接库构建流程。停止服务可在启动终端按 `Ctrl+C`；重新启动前确认原实例已退出，避免端口冲突或重复处理。
+
+### 4. 访问界面与接口
+
+将下表中的 `<设备IP>` 替换为运行服务的主机地址。
+
+| 入口 | 默认地址 | 说明 |
+| --- | --- | --- |
+| 融合态势台 | `http://<设备IP>:8000/` | 航迹、传感器状态、DDS 放行标记与过滤设置 |
+| 接入诊断 | `http://<设备IP>:8000/debug.html` | DDS 接收、解析、航迹、设备 GPS 来源与运行状态 |
+| 时空对齐工作台 | `http://<设备IP>:8000/alignment.html` | 时间观测、坐标来源、原始/校正预览与离线比较 |
+| 健康检查 | `http://<设备IP>:8000/health` | Web 网关运行状态，不等于设备已有有效数据 |
+| 外部融合 WebSocket | `ws://<设备IP>:11409/ws/main` | 供其他模块订阅融合航迹 |
+| 独立录制回放页 | `http://<设备IP>:8010/` | 需另行启动 `dds_data_web.sh` |
+| 独立实装仿真页 | `http://<设备IP>:8011/` | 需另行启动 `field_sim_web.sh` |
+
+端口冲突时可显式调整，不必停止其他人的模块：
+
+```bash
+PORT=8080 EXTERNAL_WS_PORT=11410 bash start_equipment_fusion.sh
+```
+
+## 正式 DDS 输出过滤
+
+在态势台或诊断页点击 **DDS 输出过滤 / 阈值设置**。支持分别开启或关闭：最少有效定位点数、最低水平速度、最高水平速度、最低相对雷达高度。
+
+默认配置为 **2 个有效定位点、1～15 m/s、比参考雷达站高至少 30 m**，仅在每条融合航迹建立后的 **`[0, 9)` 秒**检查。满 9 秒后，这四项规则停止拦截；原有融合输出条件和协议容量限制仍保留。不是必须等满 9 秒才发送，也不是前 9 秒不合格就永久丢弃。
+
+- **应用到当前运行**：临时改变开关和阈值，不写文件。
+- **保存配置并应用**：将开关和阈值一起写回配置，备份原文件，并在融合节点确认后生效；下次启动沿用保存值。
+- **航迹标记与详情**：显示放行状态、拦截原因、航迹年龄和筛选阶段，区分当前生效值与已保存值。
+
+这些规则是发布筛选，不是无人机识别算法。低空或悬停无人机可能在筛选期内被拦截，存续满 9 秒的非无人机目标也可能被放行。
+
+详见 [DDS 输出过滤操作说明](docs/DDS_OUTPUT_FILTER.md)。
+
+## 独立数据录制与 DDS 回放
+
+在另一个终端启动：
+
+```bash
+bash dds_data_web.sh
+```
+
+访问 8010 端口，使用终端显示的访问口令登录。工具独立于融合程序，支持：
+
+- 录制设备 DDS 报文，选择设备端允许范围内的保存目录。
+- 选择设备端录制文件，或将 Mac 等浏览器所在电脑的文件上传后回放。
+- 录制完成后下载到浏览器所在电脑，设备端原件保留。
+- 预检查文件，选择回放时序策略，再按原设备 Topic 发送 DDS。
+
+录制格式为 `sb-dds-capture-v1` JSONL，保存 DDS 应用层字节与录制时序，**不是网卡 RTPS/UDP 原始抓包**。回放前须停止或隔离其他设备输入；工具不会替你停止融合服务或保证现场网络已隔离。
+
+详见 [DDS 数据录制与回放说明](DDS_DATA_TOOL.md)。
+
+## 仿真与评价
+
+### 实装特性测试
+
+```bash
 bash field_sim_web.sh
 ```
 
-访问 `http://192.168.8.76:8011/`，按终端口令登录。选择无人机数量和每台光电跟踪对象，
-点击“生成测试数据”→“运行离线评估”，右侧显示整体与逐目标指标，可下载 JSON 报告。
-生成/评估不发 DDS；实际发送需人工确认隔离，并按页面命令另行启动测试融合。
-详见 [实装仿真操作与评价说明](FIELD_SIM_WEB_GUIDE.md) 和 [光电融合配置说明](EO_FUSION_GUIDE.md)。
+访问 8011 端口，使用终端口令登录。可设置 1～10 架无人机、雷达报告周期、单/双光电站址和各自跟踪对象，模拟低速漏检、测距失败、仅测向、旧值冻结等情况。
 
-为保留既有现场策略，3588 正式输出置信度门槛仍默认 **0.05**。
-独立离线评估和页面生成的测试融合命令显式使用 **0.2**，与 DGX 仿真口径一致；
-`SB_FUSION_MIN_CONFIDENCE` 只作用于指定进程，不会改写现场配置。评价报告会标明该门槛。
-它与真值匹配的“50 m 门限”不同，不能混为一谈。
+建议顺序：**生成测试数据 → 运行离线评价 → 核对测试专属配置 → 手动启动测试融合 → 隔离输入并预检查 → 确认 DDS 发送**。生成和离线评价不发送 DDS，控制页也不会自动启动或重启融合。
 
-本次同步未修改 C++、DDS 表头/Topic/发送方式、原生 `.so`、板端环境及现有启动脚本。
-已有可用 ARM64 DDS 桥时，本次 Python/网页更新不新增重编译要求；装备入口原有构建检查仍保留。
-Mac 可用于离线生成/评估，不使用 Linux DDS 动态库发包。上板复制时请保留现场配置、环境及录制文件。
+评价包括匹配精确率、覆盖率、F1、RMSE/P95、漏航迹、多余航迹和 ID 连续性。指标依赖真值、匹配门限与测试场景，不能直接等同于实装识别准确率。未具备定位条件的纯测向目标也不能因为“有报告”就算作定位成功。
 
-### 原演示模式（保留）
+当前 RK3588 配置的融合输出置信度门槛默认是 `0.05`；独立评价和控制页生成的测试启动命令显式使用 `0.2`。`SB_FUSION_MIN_CONFIDENCE` 可指定该进程的门槛，不会改写现场配置；它与真值匹配距离门限、正式 DDS 四项过滤阈值是不同概念。当前评价以内部融合结果为主，不代表正式 DDS 筛选后的端到端接收效果。
 
-只有在离线测试或联调时才使用内置仿真数据：
+详见 [实装仿真与多目标评价](FIELD_SIM_WEB_GUIDE.md) 和 [仿真命令行说明](FIELD_SIMULATOR_GUIDE.md)。
+
+### 原演示模式
 
 ```bash
-HOST=0.0.0.0 EXTERNAL_WS_SERVER=1 ./start_sb_fusion.sh
+HOST=0.0.0.0 EXTERNAL_WS_SERVER=1 bash start_sb_fusion.sh
 ```
 
-默认场景为：
+该命令会启动内置仿真器。不要与实装接入或其他回放混用同一数据通道，以免把仿真目标当作实测目标。
 
-```text
-zy-anti-drone/data_generator/config/scenarios/multi_target.yaml
-```
+## 调试与测试
 
-## 启动参数
-
-启动命令前的变量只对本次进程生效，不会永久修改系统配置。
-
-| 变量 | 默认值（装备模式） | 说明 |
-| --- | --- | --- |
-| `HOST` | `0.0.0.0` | Web 服务监听全部网卡，使局域网设备能够访问 |
-| `PORT` | `8000` | Web 页面和 HTTP API 端口 |
-| `EXTERNAL_WS_SERVER` | `1` | 启动独立的融合结果 WebSocket 服务 |
-| `EXTERNAL_WS_HOST` | `0.0.0.0` | WebSocket 监听全部网卡 |
-| `EXTERNAL_WS_PORT` | `11409` | WebSocket 服务端口 |
-| `EXTERNAL_WS_PATH` | `/ws/main` | WebSocket 路径 |
-| `PYTHON` | 自动选择 | 手动指定 Python 解释器路径 |
-| `SB_RADAR_INPUT_MODE` | `device_tracks` | 按设备 L2 航迹号接续；`measurements` 保留量测模式 |
-| `SB_AZIMUTH_CONVENTION` | `north_cw` | 实装协议北零顺时针；演示输入可用 `enu` |
-
-自定义端口示例：
+RK3588 初始化完成后，可在工程根目录执行以下检查。其他 Python 环境请将解释器路径替换为实际路径。
 
 ```bash
-PORT=8080 EXTERNAL_WS_PORT=11407 ./start_equipment_fusion.sh
-```
-
-## 手动重新构建
-
-修改 C++ 桥接代码或更新第三方库后，在 RK3588 上执行：
-
-```bash
-./build_native.sh --equipment-only
-```
-
-也可以重新运行完整初始化：
-
-```bash
-./setup_rk3588.sh
-```
-
-实装构建生成根目录 `libcompany_dds_bridge.so`。无参数运行 `./build_native.sh`
-才同时构建仿真桥接库，完整构建产物为：
-
-```text
-libcompany_dds_bridge.so
-zy-anti-drone/bridge/libad_proto.so
-zy-anti-drone/bridge/libad_proto_receiver.so
-zy-anti-drone/bridge/libad_proto_fusion.so
-```
-
-## 运行状态检查
-
-检查服务健康状态：
-
-```bash
+# 网关健康与正式输出筛选状态
 curl --noproxy '*' http://127.0.0.1:8000/health
-```
+curl --noproxy '*' http://127.0.0.1:8000/api/output-filter
 
-检查监听端口：
-
-```bash
-ss -lntp | grep -E ':(8000|11409)'
-```
-
-检查桥接库架构：
-
-```bash
-file libcompany_dds_bridge.so
-```
-
-输出应包含 `ARM aarch64`。检查动态链接依赖：
-
-```bash
-ldd libcompany_dds_bridge.so
-```
-
-输出中不应出现 `not found` 或 `version ... not found`。
-
-查看项目 DDS 主题：
-
-```bash
+# DDS 主题列表、雷达输入频率、正式融合输出样本
 .rk3588-env/bin/python run_sb_fusion.py inspect list
-```
-
-查看某个主题的数据或频率：
-
-```bash
-.rk3588-env/bin/python run_sb_fusion.py inspect echo RadarTarget --once
 .rk3588-env/bin/python run_sb_fusion.py inspect hz RadarTarget
+.rk3588-env/bin/python run_sb_fusion.py inspect echo FusionMultiTarget --once
 ```
 
-## 常见问题
+`inspect echo` 对上述二进制 Topic 显示长度及报文头十六进制摘要，不是完整目标解码。需要看融合进程收到什么、用了哪个站址或为何未放行时，结合接入诊断页、过滤详情及接收端监听共同判断。
 
-### Fast DDS 编译时出现 `offset set but not used`
-
-如果构建输出中出现类似警告：
-
-```text
-warning: variable 'offset' set but not used [-Wunused-but-set-variable]
-```
-
-该信息来自第三方 Fast DDS 头文件，是编译器的未使用变量警告。只要后续显示
-`构建完成`，并且生成的 `.so` 文件为 `ARM aarch64`，就不影响运行。
-
-### 提示动态库架构不匹配
-
-不要直接使用 DGX/x86_64 上编译出的 `.so` 文件。应在 RK3588 上运行：
+使用已安装依赖的 Python 环境运行回归测试；前端逻辑测试另需 Node.js：
 
 ```bash
-./setup_rk3588.sh
+python -B -m unittest discover -s tests -p 'test_*.py'
+node tests/test_debug_ui.js
+node tests/test_output_filter_ui.cjs
+node tests/test_track_output_status.cjs
 ```
 
-或：
+测试使用内存替身和临时本机服务，不向实装 DDS 网络发布数据。部分测试需要本机回环端口权限及 C++ 编译器。通过回归测试不等于通过板端验收或达到某项现场探测精度。
 
-```bash
-./build_native.sh
-```
+## 适用边界与现场注意事项
 
-### 局域网无法访问 Web 页面
+- **先校准，再融合**：设备自身站址、角度零点/方向、高度基准和时间偏差应独立核实。对齐工作台保存的是预览参数，不会自动改写正式融合参数或对原始报文做校正。
+- **测向不等于定位**：单站无距离时通常不能独立确定目标位置；双站也需要有效基线、合理交会角、时间一致性和同目标关联。
+- **多源不保证持续可观测**：雷达低速漏检、光电失距/丢失、射频无有效方位时，系统可能只能滑行预测、输出方向信息或按超时清理，不能制造真实量测。
+- **类别要有证据**：未知类别、射频占位字段或遥控端型号不能直接作为无人机确认结果；具体接纳策略以设备配置和质量门控为准。
+- **网络与时间要一致**：检查 DDS 网络、端口、系统时钟和代理设置；应用层发送计数、节点心跳均不是端到端接收确认。
+- **限定访问范围**：Web 工具面向可信联调网络，默认 HTTP 不加密，不应直接暴露公网。发布或共享前应检查现场坐标、设备协议、录制数据和凭据是否适合公开。
 
-装备模式已经默认设置 `HOST=0.0.0.0`。如果仍无法访问，请检查：
+## 目录与文档
 
-- RK3588 的实际 IP 地址；
-- Kylin 防火墙是否允许 TCP 端口 `8000` 和 `11409`；
-- 访问端与 RK3588 是否处于可互通网络。
-
-### 服务已启动但没有装备数据
-
-确认装备端正在发布 DDS 数据，并检查两端网络、DDS 主题名称及通信配置。
-可以使用 `dds_inspect.py list/echo/hz` 辅助判断数据是否到达 RK3588。
-
-## 项目结构
-
-| 路径 | 说明 |
+| 路径 | 内容 |
 | --- | --- |
-| `start_equipment_fusion.sh` | 装备 DDS 数据模式启动入口 |
-| `start_sb_fusion.sh` | 完整系统启动入口，默认包含仿真器 |
-| `setup_rk3588.sh` | RK3588 首次环境初始化 |
-| `build_native.sh` | ARM64/x86_64 原生桥接库构建 |
-| `run_sb_fusion.py` | 各融合进程的统一编排器 |
-| `dds_swarm_fusion/` | DDS 输入、跟踪、融合和 Web 网关 |
-| `zy-anti-drone/` | 装备协议、DDS 依赖及仿真数据模块 |
-| `RK3588_RUN.md` | RK3588 部署补充说明 |
+| `dds_swarm_fusion/` | 输入归一化、跟踪融合、DDS 发布筛选、Web 网关与静态页面 |
+| `configs/` | 设备布站、光电/射频策略、输出过滤和仿真配置 |
+| `tools/` | 独立录制回放、仿真、离线评价与数据处理工具 |
+| `tests/` | 协议、算法、接口、前端逻辑和平台兼容回归测试 |
+| `zy-anti-drone/`、`anti-drone-pkg/` | 设备协议、数据生成模块及依赖资源 |
+| `run_sb_fusion.py` | 多进程启动与运行编排 |
 
-## 说明
+- [RK3588 部署](RK3588_RUN.md) · [实装接入调试](RK3588_EQUIPMENT_DEBUG.md)
+- [光电坐标 / 测向融合配置](EO_FUSION_GUIDE.md) · [时空对齐工作台](ALIGNMENT_DEBUG_V1.md)
+- [DDS 录制回放](DDS_DATA_TOOL.md) · [雷达日志回放检查](RADAR_DDS_REPLAY_TEST.md)
+- [实装仿真控制与评价](FIELD_SIM_WEB_GUIDE.md) · [DDS 输出过滤](docs/DDS_OUTPUT_FILTER.md)
 
-本仓库包含装备通信和 RK3588 适配相关代码，请按照项目保密要求控制仓库权限、
-账号授权和部署文件的分发范围。
+专题文档可能包含特定批次的现场示例和历史说明；部署时以当前代码、所选配置及启动日志为准。第三方组件和设备协议资料的使用、再分发须遵循各自授权要求，不能因仓库可访问而推定允许任意使用。
